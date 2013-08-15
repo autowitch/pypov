@@ -13,12 +13,16 @@ def corner_5x5_002(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1):
     geomorph = Union(
         Difference(
             five_by_five_corner,
-            Box((-5, 35, -5), (  5, 51, -26), red),
-            Box(( 5, 35, -5), (-26, 51,   5), red),
+            Union(
+                Box(( -5, 35,  -5), (  5, 51, -26)),
+                Box((  5, 35,  -5), (-26, 51,   5)),
+                Box((-20, 35.00001, -20), ( 20, 51,  20)),
+            )
         ),
         Texture(
-            Pigment(color=(0.025, 0.025, 0.025)),
-            Finish(reflection=0.05)
+            Pigment(color=(0.5, 0.45, 0.25)),
+            #Pigment(color=(0.025, 0.025, 0.025)),
+            #Finish(reflection=0.05)
         ),
         translate=translate,
         rotate=rotate

@@ -1,4 +1,4 @@
-from pypov.pov import Box, Difference, Texture, Pigment
+from pypov.pov import Box, Difference, Texture, Pigment, Union
 from pypov.common import grey
 
 red = Texture(Pigment(color=(1, 0, 0)))
@@ -12,9 +12,11 @@ five_by_five = Difference(
 )
 
 five_by_five_corner = Difference(
-        Box((-25,    0,  -25),    ( 25,   50,  25), grey),
-        Box(( -5,    35, -24.75), (  5,   51, -26), red),
-        Box((-24.75, 35,  -5),    (-26,   51,   5), red),
+        Box((-25,    0,  -25),    ( 25,   50,  25)),
+        Union(
+            Box(( -5,    35, -24.75), (  5,   51, -26)),
+            Box((-24.75, 35,  -5),    (-26,   51,   5)),
+        )
 )
 
 
