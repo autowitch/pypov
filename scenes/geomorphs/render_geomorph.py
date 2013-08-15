@@ -6,6 +6,7 @@ import sys
 
 import argparse
 from pypov.pov import File, Settings, POV, parse_args, Camera
+from lib.environment import general, ground
 
 
 def main():
@@ -53,8 +54,10 @@ def main():
     pov_file.include("colors.inc")
     pov_file.include("stones.inc")
     pov_file.include("metals.inc")
+    general(pov_file)
+    ground(pov_file)
     camera = Camera(
-        location = (-1000, 100, -1000),
+        location = (-150, 250, -25),
         look_at = (0, 25, 0)
     )
     camera.write(pov_file)
@@ -71,6 +74,8 @@ def main():
             'geomorphs are available\n' % (args.geomorph)
         print e
         sys.exit(0)
+
+
 
     function(rotate=(0, 0, 0), translate=(0, 0, 0),
             detail_level=args.detail_level).write(pov_file)

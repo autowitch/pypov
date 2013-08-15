@@ -6,6 +6,7 @@ import sys
 
 import argparse
 from pypov.pov import File, Settings, POV, parse_args
+from lib.geomorphs import gm01
 
 def main():
 
