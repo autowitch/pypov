@@ -1,6 +1,38 @@
-from pypov.pov import Box, Difference
+from pypov.pov import Box, Difference, Texture, Pigment, Union
 from pypov.common import grey
 
+red = Texture(Pigment(color=(1, 0, 0)))
+
+five_by_five = Difference(
+        Box((-25,    0,  -25),    ( 25,   50,  25), grey),
+        Box(( -5,    35,  24.75), (  5,   51,  26), red),
+        Box(( -5,    35, -24.75), (  5,   51, -26), red),
+        Box((-24.75, 35,  -5),    (-26,   51,   5), red),
+        Box(( 24.75, 35,  -5),    ( 26,   51,   5), red),
+)
+
+five_by_five_corner = Difference(
+        Box((-25,    0,  -25),    ( 25,   50,  25)),
+        Union(
+            Box(( -5,    35, -24.75), (  5,   51, -26)),
+            Box((-24.75, 35,  -5),    (-26,   51,   5)),
+        )
+)
+
+
+ten_by_ten = Difference(
+        Box((-50, -0, -50), (50, 50, 50), grey),
+
+)
+    #geomorph = Union(
+        #Texture(
+            #Pigment(color=(0.025, 0.025, 0.025)),
+            #Finish(reflection=0.05)
+        #),
+        #translate=translate,
+        #rotate=rotate
+    #)
+    #return geomorph
 
 class TenXTen(object):
     """docstring for TenXTen"""

@@ -13,24 +13,24 @@ grass = Texture(Pigment(color=(0, 1, 0)))
 
 def general(pov_file):
     GlobalSettings(
-        Radiosity(
-            pretrace_start = 0.08,
-            pretrace_end   = 0.005,
-            count = 400,
-#            nearest_count = 5,
-            error_bound = 0.1,
-            recursion_limit = 1,
-#            low_error_factor = .5,
-#            gray_threshold = 0.0,
-#            minimum_reuse = 0.015,
-#            brightness = 1,
-#            adc_bailout = 0.01/2,
-        ),
+        #Radiosity(
+            #pretrace_start = 0.08,
+            #pretrace_end   = 0.005,
+            #count = 400,
+##            nearest_count = 5,
+            #error_bound = 0.1,
+            #recursion_limit = 1,
+##            low_error_factor = .5,
+##            gray_threshold = 0.0,
+##            minimum_reuse = 0.015,
+##            brightness = 1,
+##            adc_bailout = 0.01/2,
+        #),
         assumed_gamma = 1.0
     ).write(pov_file)
 
     Camera(
-            location=(-600, 150, -100),
+            location=(-600, 150, -110),
             look_at=(0, 25, 0)
 #            angle=30
     ).write(pov_file)
