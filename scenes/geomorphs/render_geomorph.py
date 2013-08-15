@@ -22,7 +22,7 @@ def main():
                         default='gm01',
                         dest='geomorph',
                         help='Select the geomorph to renger')
-    parser.add_argument('-l', '--list',
+    parser.add_argument('--list',
                         default=None,
                         action='store_true',
                         dest='list_geomorphs',
