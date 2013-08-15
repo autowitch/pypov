@@ -8,7 +8,7 @@ from pypov.common import grey, white
 from lib.base import five_by_five_corner, red
 
 
-def gm02(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1):
+def corner_5x5_002(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1):
     """docstring for gm02"""
     geomorph = Union(
         Difference(

@@ -57,7 +57,7 @@ def main():
     general(pov_file)
     ground(pov_file)
     camera = Camera(
-        location = (-150, 250, -25),
+        location = (-150, 250, -60),
         look_at = (0, 25, 0)
     )
     camera.write(pov_file)
