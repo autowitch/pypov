@@ -5,7 +5,7 @@ from pypov.pov import Finish, Box, Cone, Cylinder, Object
 from pypov.pov import Union, Difference
 
 from pypov.common import grey, white
-from lib.base import five_by_five_corner, cross_hatch
+from lib.base import five_by_five_corner, cross_hatch, wall_texture_1
 
 
 def corner_5x5_003(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1):
@@ -18,6 +18,7 @@ def corner_5x5_003(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1):
                 Box(( -5, 10,  -5), (  5, 21, -26)),
                 Box((  5, 10,  -5), (-26, 21,   5)),
                 Box((-20, 10.00001, -20), ( 20, 21,  20)),
+                wall_texture_1
             )
         ),
         Union(

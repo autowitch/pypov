@@ -1,11 +1,25 @@
 from pypov.pov import Box, Difference, Texture, Pigment, Union
-from pypov.pov import Checker
+from pypov.pov import Normal, Checker, Brick, Wrinkles, Finish
 from pypov.common import grey
 from pypov.colors import Colors
 
 cross_hatch = Texture(
     Pigment(Checker(Colors.LightWood, Colors.MediumWood)),
     scale=5
+)
+
+wall_texture_1 = Texture(
+    Pigment(
+        Brick(
+            Colors.DimGrey, Colors.DarkTan,
+            brick_size = (2.5, 1.5, 2.5),
+            mortar = 0.1
+        ),
+        #Normal(
+            #Wrinkles(0.75, scale=0.1)
+        #),
+        #Finish(diffuse=0.9, phong=0.2)
+    )
 )
 
 five_by_five = Difference(
