@@ -391,6 +391,14 @@ class Checker(Item):
     def __init__(self, a, b, *opts, **kwargs):
         Item.__init__(self, "checker", (a, b), opts, use_block=False, **kwargs)
 
+class Brick(Item):
+    def __init__(self, a, b, *opts, **kwargs):
+        Item.__init__(self, "brick", (a, b), opts, use_block=False, **kwargs)
+
+class Wrinkles(Item):
+    def __init__(self, a, *opts, **kwargs):
+        Item.__init__(self, "wrinkles", (a), opts, use_block=False, **kwargs)
+
 class Finish(Item):
     def __init__(self, *opts, **kwargs):
         Item.__init__(self, "finish", (), opts, **kwargs)
