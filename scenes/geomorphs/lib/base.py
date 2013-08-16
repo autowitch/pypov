@@ -1,27 +1,30 @@
 from pypov.pov import Box, Difference, Texture, Pigment, Union
+from pypov.pov import Checker
 from pypov.common import grey
+from pypov.colors import Colors
 
-red = Texture(Pigment(color=(1, 0, 0)))
+cross_hatch = Texture(
+    Pigment(Checker(Colors.LightWood, Colors.MediumWood)),
+    scale=5
+)
 
 five_by_five = Difference(
-        Box((-25,    0,  -25),    ( 25,   50,  25), grey),
-        Box(( -5,    35,  24.75), (  5,   51,  26), red),
-        Box(( -5,    35, -24.75), (  5,   51, -26), red),
-        Box((-24.75, 35,  -5),    (-26,   51,   5), red),
-        Box(( 24.75, 35,  -5),    ( 26,   51,   5), red),
+    Box((-25,     0,    -25),    ( 25,     20,  25)),
+    Box(( -4.99, 10.01,  24.75), (  4.99,  21,  26)),
+    Box(( -4.99, 10.01, -24.75), (  4.99,  21, -26)),
+    Box((-24.75, 10.01,  -4.99), (-26,     21,   4.99)),
+    Box(( 24.75, 10.01,  -4.99), ( 26,     21,   4.99)),
 )
 
 five_by_five_corner = Difference(
-        Box((-25,    0,  -25),    ( 25,   50,  25)),
-        Union(
-            Box(( -5,    35, -24.75), (  5,   51, -26)),
-            Box((-24.75, 35,  -5),    (-26,   51,   5)),
-        )
+    Box((-25,    0,     -25),    ( 25,    20,  25)),
+    Box(( -4.99, 10.01, -24.75), (  4.99, 21, -26)),
+    Box((-24.75, 10.01,  -4.99), (-26,    21,   4.99)),
 )
 
 
 ten_by_ten = Difference(
-        Box((-50, -0, -50), (50, 50, 50), grey),
+        Box((-50, -0, -50), (50, 20, 50)),
 
 )
     #geomorph = Union(

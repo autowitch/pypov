@@ -1,11 +1,11 @@
 from lib.base import TenXTen
 
 from pypov.pov import Texture, Pigment
-from pypov.pov import Finish, Box, Cone, Cylinder
+from pypov.pov import Finish, Box, Cone, Cylinder, Object
 from pypov.pov import Union, Difference
 
 from pypov.common import grey, white
-from lib.base import five_by_five_corner, red
+from lib.base import five_by_five_corner, cross_hatch
 
 
 def corner_5x5_003(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1):
@@ -13,23 +13,23 @@ def corner_5x5_003(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1):
 
     geomorph = Union(
         Difference(
-            five_by_five_corner,
+            Object(five_by_five_corner, cross_hatch),
             Union(
-                Box(( -5, 35,  -5), (  5, 51, -26)),
-                Box((  5, 35,  -5), (-26, 51,   5)),
-                Box((-20, 35.00001, -20), ( 20, 51,  20)),
+                Box(( -5, 10,  -5), (  5, 21, -26)),
+                Box((  5, 10,  -5), (-26, 21,   5)),
+                Box((-20, 10.00001, -20), ( 20, 21,  20)),
             )
         ),
         Union(
-            Cylinder((-15, 35, -15), (-15, 50, -15), 2),
-            Cylinder(( 15, 35, -15), ( 15, 50, -15), 2),
-            Cylinder((-15, 35,  15), (-15, 50,  15), 2),
-            Cylinder(( 15, 35,  15), ( 15, 50,  15), 2),
+            Cylinder((-10, 10, -10), (-10, 20, -10), 2),
+            Cylinder(( 10, 10, -10), ( 10, 20, -10), 2),
+            Cylinder((-10, 10,  10), (-10, 20,  10), 2),
+            Cylinder(( 10, 10,  10), ( 10, 20,  10), 2),
 
-            Cylinder((-15, 35, -15), (-15, 36, -15), 3),
-            Cylinder(( 15, 35, -15), ( 15, 36, -15), 3),
-            Cylinder((-15, 35,  15), (-15, 36,  15), 3),
-            Cylinder(( 15, 35,  15), ( 15, 36,  15), 3),
+            Cylinder((-10, 10, -10), (-10, 11, -10), 3),
+            Cylinder(( 10, 10, -10), ( 10, 11, -10), 3),
+            Cylinder((-10, 10,  10), (-10, 11,  10), 3),
+            Cylinder(( 10, 10,  10), ( 10, 11,  10), 3),
         ),
         Texture(
             Pigment(color=(0.5, 0.45, 0.25)),

@@ -1,22 +1,21 @@
 from lib.base import TenXTen
 
 from pypov.pov import Texture, Pigment
-from pypov.pov import Finish, Box, Cone
-from pypov.pov import Union, Difference
+from pypov.pov import Union, Difference, Object, Box
 
 from pypov.common import grey, white
-from lib.base import five_by_five_corner, red
+from lib.base import five_by_five_corner, cross_hatch
 
 
 def corner_5x5_002(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1):
     """docstring for gm02"""
     geomorph = Union(
         Difference(
-            five_by_five_corner,
+            Object(five_by_five_corner, cross_hatch),
             Union(
-                Box(( -5, 35,  -5), (  5, 51, -26)),
-                Box((  5, 35,  -5), (-26, 51,   5)),
-                Box((-20, 35.00001, -20), ( 20, 51,  20)),
+                Box(( -5, 10,  -5), (  5, 21, -26)),
+                Box((  5.0001, 10,  -5), (-26, 21,   5)),
+                Box((-20, 10.000001, -20), ( 20, 21,  20)),
             )
         ),
         Texture(
