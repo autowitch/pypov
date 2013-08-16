@@ -28,6 +28,11 @@ def main():
                         action='store_true',
                         dest='list_geomorphs',
                         help='List all geomorphs')
+    parser.add_argument('--ground-offset',
+                        default=0,
+                        type=int,
+                        dest='ground_offset',
+                        help='Set the offset to the ground plane')
     args = parse_args(parser)
 
     if args.list_geomorphs:
@@ -55,7 +60,7 @@ def main():
     pov_file.include("stones.inc")
     pov_file.include("metals.inc")
     general(pov_file)
-    ground(pov_file)
+    ground(pov_file, offset=args.ground_offset)
     camera = Camera(
         location = (-150, 250, -60),
         look_at = (0, 25, 0)

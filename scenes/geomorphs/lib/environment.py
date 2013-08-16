@@ -13,19 +13,19 @@ grass = Texture(Pigment(color=(0, 1, 0)))
 
 def general(pov_file):
     GlobalSettings(
-        #Radiosity(
-            #pretrace_start = 0.08,
-            #pretrace_end   = 0.005,
-            #count = 400,
-##            nearest_count = 5,
-            #error_bound = 0.1,
-            #recursion_limit = 1,
-##            low_error_factor = .5,
-##            gray_threshold = 0.0,
-##            minimum_reuse = 0.015,
-##            brightness = 1,
-##            adc_bailout = 0.01/2,
-        #),
+        Radiosity(
+            pretrace_start = 0.08,
+            pretrace_end   = 0.005,
+            count = 400,
+#            nearest_count = 5,
+            error_bound = 0.1,
+            recursion_limit = 1,
+#            low_error_factor = .5,
+#            gray_threshold = 0.0,
+#            minimum_reuse = 0.015,
+#            brightness = 1,
+#            adc_bailout = 0.01/2,
+        ),
         assumed_gamma = 1.0
     ).write(pov_file)
 
@@ -40,13 +40,14 @@ def general(pov_file):
     LightSource((-150000, 150000, -100000), color=(0.3, 0, 0)).write(pov_file)
 
 
-def ground(pov_file):
+def ground(pov_file, offset=0):
     Plane(
         (0, 1, 0), -0.0,
         Texture(
             Pigment(Checker((0.75, 0.75, 0.75), (1, 1, 1))),
             scale=10
-        )
+        ),
+        translate=(0, -1 * offset, 0)
     ).write(pov_file)
     SkySphere(Pigment(color="MidnightBlue")).write(pov_file)
 
