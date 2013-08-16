@@ -8,10 +8,15 @@ cross_hatch = Texture(
     scale=5
 )
 
+cross_hatch_transparent = Texture(
+    Pigment(Checker(Colors.LightWood, Colors.MediumWood)),
+    scale=5
+)
+
 wall_texture_1 = Texture(
     Pigment(
         Brick(
-            Colors.DimGrey, Colors.DarkTan,
+            Colors.Gray15, Colors.DarkTan,
             brick_size = (2.5, 1.5, 2.5),
             mortar = 0.1
         ),
