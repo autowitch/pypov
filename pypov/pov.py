@@ -382,10 +382,19 @@ class Texture(Item):
     def __init__(self, *opts, **kwargs):
         Item.__init__(self, "texture", (), opts, **kwargs)
 
+class Material(Item):
+    def __init__(self, *opts, **kwargs):
+        Item.__init__(self, "material", (), opts, **kwargs)
+
+class Interior(Item):
+    def __init__(self, *opts, **kwargs):
+        Item.__init__(self, "interior", (), opts, **kwargs)
 
 class Pigment(Item):
     def __init__(self, *opts, **kwargs):
         Item.__init__(self, "pigment", (), opts, **kwargs)
+        print self.opts
+        print self.__dict__
 
 class Checker(Item):
     def __init__(self, a, b, *opts, **kwargs):

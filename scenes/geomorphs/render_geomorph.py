@@ -7,6 +7,7 @@ import sys
 import argparse
 from pypov.pov import File, Settings, POV, parse_args, Camera
 from lib.environment import general, ground
+from lib.base import cross_hatch, cross_hatch_2, cross_hatch_3
 
 
 def main():
@@ -28,11 +29,15 @@ def main():
                         action='store_true',
                         dest='list_geomorphs',
                         help='List all geomorphs')
-    parser.add_argument('--info',
-                        default=None,
+    parser.add_argument('--info', default=None,
                         action='store_true',
                         dest='info',
                         help='Display information about a specific geomorph')
+    parser.add_argument('--earth-texture', default=None,
+                        type=str,
+                        choices=['checker', 'glass', 'clear'],
+                        dest='earth_texture',
+                        help='Set the texture the geomorph is rendered inside')
     parser.add_argument('--ground-offset',
                         default=0,
                         type=int,
@@ -80,6 +85,14 @@ def main():
         print data.__dict__ # TODO: Make this not suck
         sys.exit(0)
 
+    earth_texture = cross_hatch_2
+    if args.earth_texture:
+        textures = {'glass':cross_hatch_3,
+                'checker':cross_hatch,
+                'clear':cross_hatch_2,
+        }
+        earth_texture = textures[args.earth_texture]
+
     pov_file = File("geomorph-test.pov")
     pov_file.include("colors.inc")
     pov_file.include("stones.inc")
@@ -93,7 +106,8 @@ def main():
     camera.write(pov_file)
 
     function(rotate=(0, 0, 0), translate=(0, 0, 0),
-            detail_level=args.detail_level).write(pov_file)
+            detail_level=args.detail_level,
+            cross_hatch_texture=earth_texture).write(pov_file)
 
     settings = Settings()
     renderer = POV()
