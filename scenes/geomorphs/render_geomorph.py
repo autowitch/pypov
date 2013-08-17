@@ -28,6 +28,11 @@ def main():
                         action='store_true',
                         dest='list_geomorphs',
                         help='List all geomorphs')
+    parser.add_argument('--info',
+                        default=None,
+                        action='store_true',
+                        dest='info',
+                        help='Display information about a specific geomorph')
     parser.add_argument('--ground-offset',
                         default=0,
                         type=int,
@@ -55,6 +60,26 @@ def main():
         print geomorphs
         sys.exit(0)
 
+    geomorph_module = None
+    try:
+        geomorph_module = __import__('lib.geomorphs.%s' % args.geomorph)
+        #print dir(geomorph_module)
+        #print geomorph_module.__dict__
+        module = getattr(geomorph_module.geomorphs, args.geomorph)
+        function = getattr(module, args.geomorph)
+    except ImportError, e:
+        print 'geomorph %s was not found. Use the --list option to see what' \
+            'geomorphs are available\n' % (args.geomorph)
+        print e
+        sys.exit(0)
+
+    if args.info:
+        # print "calling %s_info" % args.geomorph
+        info_function = getattr(module, '%s_info' % args.geomorph)
+        data = info_function()
+        print data.__dict__ # TODO: Make this not suck
+        sys.exit(0)
+
     pov_file = File("geomorph-test.pov")
     pov_file.include("colors.inc")
     pov_file.include("stones.inc")
@@ -66,21 +91,6 @@ def main():
         look_at = (0, 25, 0)
     )
     camera.write(pov_file)
-
-    geomorph_module = None
-    try:
-        geomorph_module = __import__('lib.geomorphs.%s' % args.geomorph)
-        print dir(geomorph_module)
-        print geomorph_module.__dict__
-        module = getattr(geomorph_module.geomorphs, args.geomorph)
-        function = getattr(module, args.geomorph)
-    except ImportError, e:
-        print 'geomorph %s was not found. Use the --list option to see what' \
-            'geomorphs are available\n' % (args.geomorph)
-        print e
-        sys.exit(0)
-
-
 
     function(rotate=(0, 0, 0), translate=(0, 0, 0),
             detail_level=args.detail_level).write(pov_file)
