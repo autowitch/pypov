@@ -26,7 +26,8 @@ def general(pov_file):
 #            brightness = 1,
 #            adc_bailout = 0.01/2,
         ),
-        assumed_gamma = 1.0
+        assumed_gamma = 1.0,
+        max_trace_level=100
     ).write(pov_file)
 
     Camera(
