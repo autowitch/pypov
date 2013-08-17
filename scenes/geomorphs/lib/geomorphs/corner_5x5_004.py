@@ -7,6 +7,17 @@ from pypov.pov import Union, Difference
 from pypov.common import grey, white
 from lib.base import five_by_five_corner, cross_hatch, wall_texture_1
 
+from lib.metadata import Metadata
+
+def corner_5x5_004_info():
+    return Metadata("Corner room with pit", "c4",
+            description="Two passages open up into a room that is filled with a 100' deep stepped pit.",
+            block_type="corner",
+            bottom=-100, top=20, size="5x5",
+            repeatable=False, fully_connected=True,
+            dead_ends=False, entrance=False, has_rooms=True,
+            passage_type="hewn", wet=False)
+
 
 def corner_5x5_004(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1):
     """docstring for gm02"""
