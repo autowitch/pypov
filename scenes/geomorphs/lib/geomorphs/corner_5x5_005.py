@@ -8,6 +8,17 @@ from pypov.common import grey, white
 from lib.base import five_by_five_corner, cross_hatch
 
 
+from lib.metadata import Metadata
+
+def corner_5x5_005_info():
+    return Metadata("Corner with side rooms", "c5",
+            description="Corner with two small side rooms",
+            block_type="corner",
+            bottom=0, top=20, size="5x5",
+            repeatable=True, fully_connected=True,
+            dead_ends=False, entrance=False, has_rooms=True,
+            passage_type="hewn", wet=False)
+
 def corner_5x5_005(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1):
     """docstring for gm02"""
     geomorph = Union(
