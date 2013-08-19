@@ -43,6 +43,14 @@ def main():
                         type=int,
                         dest='ground_offset',
                         help='Set the offset to the ground plane')
+
+    parser.add_argument('-R', '--rotate',
+                        nargs=3,
+                        type=float,
+                        default=None,
+                        dest='rotation',
+                        metavar=('X', 'Y', 'Z'),
+                        help='Set camera location')
     args = parse_args(parser)
 
     if args.list_geomorphs:
@@ -82,7 +90,8 @@ def main():
         # print "calling %s_info" % args.geomorph
         info_function = getattr(module, '%s_info' % args.geomorph)
         data = info_function()
-        print data.__dict__ # TODO: Make this not suck
+        for x in sorted(data.__dict__):
+            print "%s: %s" % (x, data.__dict__[x])
         sys.exit(0)
 
     earth_texture = cross_hatch_2
@@ -93,10 +102,15 @@ def main():
         }
         earth_texture = textures[args.earth_texture]
 
+    rotation = (0, 0, 0)
+    if args.rotation:
+        rotation = args.rotation
+
     pov_file = File("geomorph-test.pov")
     pov_file.include("colors.inc")
     pov_file.include("stones.inc")
     pov_file.include("metals.inc")
+    pov_file.include("functions.inc")
     general(pov_file)
     ground(pov_file, offset=args.ground_offset)
     camera = Camera(
@@ -105,7 +119,7 @@ def main():
     )
     camera.write(pov_file)
 
-    function(rotate=(0, 0, 0), translate=(0, 0, 0),
+    function(rotate=rotation, translate=(0, 0, 0),
             detail_level=args.detail_level,
             cross_hatch_texture=earth_texture).write(pov_file)
 

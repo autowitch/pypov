@@ -137,7 +137,6 @@ class Overrides(object):
 
     @staticmethod
     def update_overrides(args):
-        print repr(args)
         if args.camera_angle != Overrides.camera_angle or \
                 args.camera_location != None or \
                 args.camera_look_at != None:
@@ -393,8 +392,6 @@ class Interior(Item):
 class Pigment(Item):
     def __init__(self, *opts, **kwargs):
         Item.__init__(self, "pigment", (), opts, **kwargs)
-        print self.opts
-        print self.__dict__
 
 class Checker(Item):
     def __init__(self, a, b, *opts, **kwargs):
@@ -499,6 +496,14 @@ class Polygon_4(Item):
 class Sphere(Item):
     def __init__(self, v, r, *opts, **kwargs):
         Item.__init__(self, "sphere", (v, r), opts, **kwargs)
+
+class Isosurface(Item):
+    def __init__(self, *opts, **kwargs):
+        Item.__init__(self, "isosurface", opts, **kwargs)
+
+class Function(Item):
+    def __init__(self, f, *opts, **kwargs):
+        Item.__init__(self, "function", (f), opts, **kwargs)
 
 # CSG
 
