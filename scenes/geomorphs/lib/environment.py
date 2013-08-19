@@ -40,6 +40,8 @@ def general(pov_file):
     LightSource((-150000, 150000, 100000), color=(0, 0.3, 0)).write(pov_file)
     LightSource((-150000, 150000, -100000), color=(0.3, 0, 0)).write(pov_file)
 
+    pov_file.declare('fn_Pigm', 'function { pigment { agate color_map { [0 color rgb 0] [1 color rgb 1] } } }')
+
 
 def ground(pov_file, offset=0):
     Plane(

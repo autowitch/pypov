@@ -40,33 +40,55 @@ def corner_entrance_5x5_001(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=
                 # Rooms
                 Box((8, 10.0002, -15), (-10, 21, 10)),
                 Box((8, 10.0002, 12), (-10, 21, 23)),
-                Box((23, 10.0002, 7), (10, 21, 23)),
 
                 # Doors
-                Box((15, 10.00003, 5), (-9, 16, 1.5)),
-                Cylinder((15, 15, 3.25), (0, 15, 3.25), 2),
+                Box((25, 10.00003, 5), (-9, 16, 1.5)),
+                Cylinder((25, 16, 3.25), (0, 16, 3.25), 1.75),
                 Box((-2, 10.00002, -18), (2, 16, 14)),
                 Cylinder((0, 16, -18), (0, 16, 14), 2),
                 Box((-13, 10.00001, -2), (-9, 16, 2)),
                 Cylinder((-13, 16, 0), (-9, 16, 0), 2),
-                Box((11, 10.000003, 21), (7, 15, 18)),
-                Cylinder((11, 15, 19.5), (7, 15, 19.5), 1.5),
+
+                # Outside
+                Object(
+                    Box((11, -1, -26), (26, 21, 26),
+                        cross_hatch_texture
+                    ),
+                ),
 
                 wall_texture_1
             ),
         ),
-        Object(
-            Difference(
-    #            Isosurface(Function("y + f_noised3d(x*2, 0, z*2)"),
-                #Isosurface("function { abs(y + f_noise3d(x / 20, 0, z / 20) * 15) - 1 } contained_by { box { <-25, -20, -25>, <25, 20, 25> } } max_gradient 2 ",
-                Isosurface("function { abs(y + f_wrinkles(x / 40, 0, z / 40) * f_crackle(x / 40, 0, z / 40) * -70 - f_agate(x / 20, 0, z / 20)- f_granite(x / 20, 0, z / 20)) - 1 } contained_by { box { <-250, -90, -250>, <250, 90, 250> } } max_gradient 2 ",
-                    translate=(0, 10, 0),
-                    rotate=(0, 45, 0),
+#        Intersection(
+            Union(
+                Difference(
+                    Object(
+                        Isosurface("function  { f_rounded_box (x, y, z, 1, 2, 20, 10 ) - f_ridged_mf(x / 10, y / 15, z / 10, 1, 0.5, 0.5, 1.2, 1, 2) * 2 - fn_Pigm(x, y, z).gray*0.05 } contained_by { box { <-25, -25, -25>, <25, 25, 25> } } max_gradient 10 ", #- fn_Pigm(x, y, z).gray*0.05} ",
+            #            Isosurface("function  { f_sphere(x, y, z, 10) } contained_by { box { <-25, -25, -25>, <25, 25, 25> } } ", #- fn_Pigm(x, y, z).gray*0.05} ",
+            ##            Isosurface(Function("y + f_noised3d(x*2, 0, z*2)"),
+                        ##Isosurface("function { abs(y + f_noise3d(x / 20, 0, z / 20) * 15) - 1 } contained_by { box { <-25, -20, -25>, <25, 20, 25> } } max_gradient 2 ",
+                        #Isosurface("function { abs(y + f_wrinkles(x / 40, 0, z / 40) * f_crackle(x / 40, 0, z / 40) * -70 - f_agate(x / 20, 0, z / 20)- f_granite(x / 20, 0, z / 20)) - 1 } contained_by { box { <-250, -90, -250>, <250, 90, 250> } } max_gradient 2 ",
+                            translate=(14, 10, 5),
+                            rotate=(0, 10, 15),
+            #                scale=(100, 100, 100),
+                        ),
+                    ),
+                    Box((25, 10.00003, 5), (-9, 16, 1.5)),
+                    Cylinder((25, 16, 3.25), (0, 16, 3.25), 1.75),
+                    Texture(Pigment(color=Colors.Tan))
                 ),
-                Cylinder((15, 20, 0), (15, 70, 0), 5.01),
-                Texture(Pigment(color=Colors.DarkOliveGreen)),
+                Object(
+                    Isosurface("function { abs(y + f_noise3d(x / 20, 0, z / 20) * 15) - 4 } contained_by { box { <14, -20, -10>, <25, 20, 14> } } max_gradient 4 ",
+                        translate=(0, 11, 0),
+                    ),
+                    Texture(Pigment(color=Colors.DarkOliveGreen))
+                ),
             ),
-        ),
+            #Object(
+                #Box((12, 3, -7), (25, 25, 11)),
+                #cross_hatch_texture
+            #)
+        #),
         wall_texture_1,
         translate=translate,
         rotate=rotate
