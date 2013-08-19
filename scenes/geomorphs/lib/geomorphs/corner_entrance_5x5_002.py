@@ -72,17 +72,16 @@ def corner_entrance_5x5_002(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=
         Object(
             Difference(
     #            Isosurface(Function("y + f_noised3d(x*2, 0, z*2)"),
-                Isosurface("function { abs(y + f_noise3d(x / 20, 0, z / 20) * 15) - 1 } contained_by { box { <-10, -20, -15>, <25, 20, 15> } }",
-    #                contained_by=Box((-20, -20, -20), (20, 20, 20)),
+                Isosurface("function { abs(y + f_noise3d(x / 20, 0, z / 20) * 15) - 2 } contained_by { box { <-10, -20, -15>, <25, 20, 15> } } max_gradient 2 ",
                     translate=(0, 61, 0),
                 ),
                 Cylinder((15, 20, 0), (15, 70, 0), 5.01),
+                Texture(Pigment(color=Colors.DarkOliveGreen)),
             ),
-            Texture(Pigment(color=Colors.DarkOliveGreen)),
         ),
         Union(
             Difference(
-                Box((24, 58, -8), (-2, 69.999, 8)),
+                Box((24, 56.0, -8), (-2, 69.999, 8)),
                 Cylinder((15, 57, 0), (15, 62, 0), 5.011),
                 Box((23, 60.00001, -7), (10, 70, 7)),
                 Box((9, 60.5, -7), (-1, 70, 7)),
@@ -97,7 +96,7 @@ def corner_entrance_5x5_002(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=
                     Cylinder((8, 65, 6), (11, 65, 6), 4),
                 ),
                 Box((2, 64, 9), (5, 67.5, -9)),
-                Cylinder((3.5, 67.5, 9), (3.5, 67.5, -9), 1.5)
+                Cylinder((3.5, 67.5, 9), (3.5, 67.5, -9), 1.5),
             ),
             Box((-2, 58, -2), (-3, 60.5, 2)),
             Box((-3, 58, -2), (-4, 60, 2)),
