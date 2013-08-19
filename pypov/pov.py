@@ -239,6 +239,10 @@ class File:
         self.writeln( '#include "%s"' % name )
         self.writeln()
 
+    def declare(self, name, macro):
+        self.writeln( '#declare %s=%s' % (name, macro) )
+        self.writeln()
+
     def indent(self):
         self.__indent += 1
 
