@@ -41,10 +41,7 @@ cross_hatch_3 = Material(
     )
 )
 
-cross_hatch_transparent = Texture(
-    Pigment(Checker(Colors.LightWood, Colors.MediumWood)),
-    scale=5
-)
+# Wall Texture 1 - sandstone brick
 
 wall_texture_1 = Texture(
     Pigment(
@@ -57,6 +54,7 @@ wall_texture_1 = Texture(
             #Wrinkles(0.75, scale=0.1)
         #),
         #Finish(diffuse=0.9, phong=0.2)
+        translate=(0.15, 0.15, 0.15)
     )
 )
 
