@@ -21,4 +21,12 @@ def slice_ground(metadata_list, context):
         return None
 
 
-
+def float_range(start, stop, step):
+    if step <= 0:
+        raise Exception("Invalid step")
+    x = start
+    while True:
+        if x >= stop:
+            return
+        yield x
+        x += step
