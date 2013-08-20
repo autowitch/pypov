@@ -88,7 +88,23 @@ def five_by_five_dead_end(highlight_exits=False): # one exit
     )
     return obj
 
-def five_by_ten(highlight_exits=False):
+def five_by_ten_edge(highlight_exits=False):
+    exits = Union(
+        Box((-49.75, 10.01,  -2.499), (-51,     21,   2.499)),
+        Box(( 49.75, 10.01,  -2.499), ( 51,     21,   2.499)),
+    )
+    if highlight_exits:
+        exits = Union(
+            Box((-49.75, 10.01,  -2.499), (-51,     21,   2.499), Pigment(color=Colors.Red)),
+            Box(( 49.75, 10.01,  -2.499), ( 51,     21,   2.499), Pigment(color=Colors.Red)),
+        )
+    obj = Difference(
+        Box((-50.00001, -0, -25.00001), (50.00001, 20, 25.00001)),
+        exits
+    )
+    return obj
+
+def five_by_ten_full(highlight_exits=False):
     exits = Union(
         Box((-49.75, 10.01,  -2.499), (-51,     21,   2.499)),
         Box(( 49.75, 10.01,  -2.499), ( 51,     21,   2.499)),
