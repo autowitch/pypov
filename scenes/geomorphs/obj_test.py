@@ -126,7 +126,7 @@ def main():
         translate=(50, 0, 0),
         detail_level=args.detail_level,
         cross_hatch_texture=earth_texture).write(pov_file)
-    corner_5x5_004.corner_5x5_004(
+    corner_entrance_5x5_002.corner_entrance_5x5_002(
         rotate=(0, 180, 0),
         translate=(50, 0, 50),
         detail_level=args.detail_level,
