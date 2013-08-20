@@ -35,10 +35,10 @@ def general(pov_file):
             look_at=(0, 25, 0)
 #            angle=30
     ).write(pov_file)
-    LightSource((100000, 100000, 100000), color=(1, 1, 1)).write(pov_file)
-    LightSource((150000, 150000, -100000), color=(0, 0, 0.3)).write(pov_file)
-    LightSource((-150000, 150000, 100000), color=(0, 0.3, 0)).write(pov_file)
-    LightSource((-150000, 150000, -100000), color=(0.3, 0, 0)).write(pov_file)
+    LightSource((100000, 100000, 100000), color=(0.6, 0.6, 0.5)).write(pov_file)
+    LightSource((150000, 150000, -100000), color=(0.25, 0.25, 0.3)).write(pov_file)
+#    LightSource((-150000, 150000, 100000), color=(0.25, 0.3, 0.25)).write(pov_file)
+#    LightSource((-150000, 150000, -100000), color=(0.3, 0.25, 0.25)).write(pov_file)
 
     pov_file.declare('fn_Pigm', 'function { pigment { agate color_map { [0 color rgb 0] [1 color rgb 1] } } }')
 
