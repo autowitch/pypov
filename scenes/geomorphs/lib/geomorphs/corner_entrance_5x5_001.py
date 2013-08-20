@@ -64,7 +64,7 @@ def corner_entrance_5x5_001(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=
             Union(
                 Difference(
                     Object(
-                        Isosurface("function  { f_rounded_box (x, y, z, 1, 2, 20, 10 ) - f_ridged_mf(x / 10, y / 15, z / 10, 1, 0.5, 0.5, 1.2, 1, 2) * 2 - fn_Pigm(x, y, z).gray*0.05 } contained_by { box { <-25, -25, -25>, <25, 25, 25> } } max_gradient 10 ", #- fn_Pigm(x, y, z).gray*0.05} ",
+                        Isosurface("function  { f_rounded_box (x, y, z, 1, 2, 20, 10 ) - f_ridged_mf(x / 10, y / 15, z / 10, 1, 0.5, 0.5, 1.2, 1, 2) * 2 - fn_Pigm(x, y, z).gray*0.05 } contained_by { box { <-25.001, -25.001, -25.001>, <25.001, 25.001, 25.001> } } max_gradient 10 ", #- fn_Pigm(x, y, z).gray*0.05} ",
                             translate=(14, 10, 5),
                             rotate=(0, 10, 15),
                         ),
@@ -74,7 +74,7 @@ def corner_entrance_5x5_001(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=
                     Texture(Pigment(color=Colors.Tan))
                 ),
                 Object(
-                    Isosurface("function { abs(y + f_noise3d(x / 20, 0, z / 20) * 15) - 4 } contained_by { box { <14, -20, -10>, <25, 20, 14> } } max_gradient 4 ",
+                    Isosurface("function { abs(y + f_noise3d(x / 20, 0, z / 20) * 15) - 4 } contained_by { box { <14.0002, -20, -10.0002>, <25.0002, 20, 14.0002> } } max_gradient 4 ",
                         translate=(0, 11, 0),
                     ),
                     Texture(Pigment(color=Colors.DarkOliveGreen))
