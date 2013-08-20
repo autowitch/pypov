@@ -1,7 +1,6 @@
 from pypov.pov import Box, Difference, Texture, Pigment, Union
-from pypov.pov import Normal, Checker, Brick, Wrinkles, Finish
+from pypov.pov import Checker, Brick, Finish
 from pypov.pov import Interior, Material
-from pypov.common import grey
 from pypov.colors import Colors
 
 # Basic checkerboard pattern on a 5x5 grid. tiles well.
