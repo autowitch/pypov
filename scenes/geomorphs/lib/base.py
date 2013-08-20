@@ -26,8 +26,8 @@ def five_by_five_full(highlight_exits=False):
 
 def five_by_five_corner(highlight_exits=False):
     exits = Union(
-        Box(( -4.99, 10.01, -24.75), (  4.99, 21, -26)),
-        Box((-24.75, 10.01,  -4.99), (-26,    21,   4.99)),
+        Box(( -2.499, 10.01, -24.75), (  2.499, 21, -26)),
+        Box((-24.75, 10.01,  -2.499), (-26,    21,   2.499)),
     )
     if highlight_exits:
         exits = Union(
