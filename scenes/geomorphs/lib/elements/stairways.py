@@ -1,6 +1,6 @@
 from pypov.pov import Cylinder, Box, Intersection, Difference, Union, Object
 from lib.util import float_range
-from lib.base import wall_texture_1
+from lib.textures import wall_texture_1
 
 def circular_stairs(height=10, radius=5, core_radius=1.5, step_height=1,
         step_angle=10, start_angle=0, step_texture=wall_texture_1,

@@ -5,7 +5,8 @@ from pypov.pov import Union, Difference
 from pypov.colors import Colors
 
 from pypov.common import grey, white
-from lib.base import five_by_five_corner, cross_hatch, wall_texture_1, cross_hatch_2
+from lib.base import five_by_five_corner
+from lib.textures import cross_hatch, cross_hatch_2, wall_texture_1
 
 from lib.metadata import Metadata
 from lib.elements.stairways import circular_stairs
@@ -27,15 +28,15 @@ def corner_entrance_5x5_001(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=
     step_texture = Texture(Pigment(color=Colors.Gray50))
     geomorph = Union(
         Difference(
-            Object(five_by_five_corner, cross_hatch_texture),
+            Object(five_by_five_corner(), cross_hatch_texture),
             Union(
                 #Box(( -5, 10,  -4.9999), (  5, 21, -26)), # hall 1
                 #Box((  5.0001, 10,  -5), (-26, 21,   5)), # hall 2
                 #Box((-20, 10.000001, -20), ( 20, 21,  20)), # big room
 
                 # Halls
-                Box(( -5, 10,  -17), (  5, 21, -26)),
-                Box((  -12, 10,  -5), (-26, 21,   5)),
+                Box(( -2.5, 10,  -17), (  2.5, 21, -26)),
+                Box((  -12, 10,  -2.5), (-26, 21,   2.5)),
 
                 # Rooms
                 Box((8, 10.0002, -15), (-10, 21, 10)),
@@ -59,18 +60,13 @@ def corner_entrance_5x5_001(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=
                 wall_texture_1
             ),
         ),
-#        Intersection(
+        Intersection(
             Union(
                 Difference(
                     Object(
                         Isosurface("function  { f_rounded_box (x, y, z, 1, 2, 20, 10 ) - f_ridged_mf(x / 10, y / 15, z / 10, 1, 0.5, 0.5, 1.2, 1, 2) * 2 - fn_Pigm(x, y, z).gray*0.05 } contained_by { box { <-25, -25, -25>, <25, 25, 25> } } max_gradient 10 ", #- fn_Pigm(x, y, z).gray*0.05} ",
-            #            Isosurface("function  { f_sphere(x, y, z, 10) } contained_by { box { <-25, -25, -25>, <25, 25, 25> } } ", #- fn_Pigm(x, y, z).gray*0.05} ",
-            ##            Isosurface(Function("y + f_noised3d(x*2, 0, z*2)"),
-                        ##Isosurface("function { abs(y + f_noise3d(x / 20, 0, z / 20) * 15) - 1 } contained_by { box { <-25, -20, -25>, <25, 20, 25> } } max_gradient 2 ",
-                        #Isosurface("function { abs(y + f_wrinkles(x / 40, 0, z / 40) * f_crackle(x / 40, 0, z / 40) * -70 - f_agate(x / 20, 0, z / 20)- f_granite(x / 20, 0, z / 20)) - 1 } contained_by { box { <-250, -90, -250>, <250, 90, 250> } } max_gradient 2 ",
                             translate=(14, 10, 5),
                             rotate=(0, 10, 15),
-            #                scale=(100, 100, 100),
                         ),
                     ),
                     Box((25, 10.00003, 5), (-9, 16, 1.5)),
@@ -84,11 +80,11 @@ def corner_entrance_5x5_001(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=
                     Texture(Pigment(color=Colors.DarkOliveGreen))
                 ),
             ),
-            #Object(
-                #Box((12, 3, -7), (25, 25, 11)),
-                #cross_hatch_texture
-            #)
-        #),
+            Object(
+                Box((12, 3, -7), (25, 27, 11)),
+                cross_hatch_texture
+            )
+        ),
         wall_texture_1,
         translate=translate,
         rotate=rotate

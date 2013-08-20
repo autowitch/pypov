@@ -5,7 +5,8 @@ from pypov.pov import Union, Difference
 from pypov.colors import Colors
 
 from pypov.common import grey, white
-from lib.base import five_by_five_corner, cross_hatch, wall_texture_1, cross_hatch_2
+from lib.base import five_by_five_corner
+from lib.textures import cross_hatch, wall_texture_1, cross_hatch_2
 
 from lib.metadata import Metadata
 from lib.elements.stairways import circular_stairs
@@ -27,15 +28,15 @@ def corner_entrance_5x5_002(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=
     step_texture = Texture(Pigment(color=Colors.Gray50))
     geomorph = Union(
         Difference(
-            Object(five_by_five_corner, cross_hatch_texture),
+            Object(five_by_five_corner(), cross_hatch_texture),
             Union(
                 #Box(( -5, 10,  -4.9999), (  5, 21, -26)), # hall 1
                 #Box((  5.0001, 10,  -5), (-26, 21,   5)), # hall 2
                 #Box((-20, 10.000001, -20), ( 20, 21,  20)), # big room
 
                 # Halls
-                Box(( -5, 10,  -17), (  5, 21, -26)),
-                Box((  -12, 10,  -5), (-26, 21,   5)),
+                Box(( -2.5, 10,  -17), (  2.5, 21, -26)),
+                Box((  -12, 10,  -2.5), (-26, 21,   2.5)),
 
                 # Stair Base
                 Cylinder((15, 10, 0), (15, 21, 0), 5),
