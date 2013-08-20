@@ -1,4 +1,3 @@
-
 from pypov.pov import Texture, Pigment, Isosurface, Function, Intersection
 from pypov.pov import Finish, Box, Cone, Object, Cylinder
 from pypov.pov import Union, Difference
