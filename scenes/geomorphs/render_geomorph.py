@@ -7,7 +7,7 @@ import sys
 import argparse
 from pypov.pov import File, Settings, POV, parse_args, Camera
 from lib.environment import general, ground
-from lib.base import cross_hatch, cross_hatch_2, cross_hatch_3
+from lib.textures import cross_hatch, cross_hatch_2, cross_hatch_3
 
 
 def main():
