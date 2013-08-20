@@ -24,7 +24,7 @@ def corner_5x5_001(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
         Difference(
             Object(five_by_five_corner(), cross_hatch_texture),
             Box((-2.5, 10, -2.49999), (  2.5, 21, -26), wall_texture_1),
-            Box(( 5, 10, -2.5), (-26, 21,   2.5), wall_texture_1),
+            Box(( 2.5, 10, -2.5), (-26, 21,   2.5), wall_texture_1),
         ),
         Texture(
             Pigment(color=(0.025, 0.025, 0.025)),
