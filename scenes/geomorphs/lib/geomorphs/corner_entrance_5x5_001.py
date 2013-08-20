@@ -81,7 +81,7 @@ def corner_entrance_5x5_001(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=
                 ),
             ),
             Object(
-                Box((12, 3, -7), (25, 27, 11)),
+                Box((11, 3, -7), (25, 27, 11)),
                 cross_hatch_texture
             )
         ),
