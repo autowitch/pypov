@@ -19,7 +19,7 @@ def five_by_five_full(highlight_exits=False):
             Box(( 24.75, 10.01,  -2.499), ( 26,     21,   2.499), Pigment(color=Colors.Red)),
         )
     obj = Difference( # 4 exits
-        Box((-25,     0,    -25),    ( 25,     20,  25)),
+        Box((-25.00001,     0,    -25.00001),    ( 25.00001,     20,  25.00001)),
         exits
     )
     return obj
@@ -35,7 +35,7 @@ def five_by_five_corner(highlight_exits=False):
             Box((-24.75, 10.01,  -4.99), (-26,    21,   4.99), Pigment(color=Colors.Red)),
         )
     obj = Difference( # two exits 90 degrees
-        Box((-25,    0,     -25),    ( 25,    20,  25)),
+        Box((-25.00001,    0,     -25.00001),    ( 25.00001,    20,  25.00001)),
         exits,
     )
     return obj
@@ -51,7 +51,7 @@ def five_by_five_pipe(highlight_exits=False):
             Box(( -4.99, 10.01,  24.75), (  4.99, 21, 26), Pigment(color=Colors.Red)),
         )
     obj= Difference( # two exits 180 degrees
-        Box((-25,    0,     -25),    ( 25,    20,  25)),
+        Box((-25.00001,    0,     -25.00001),    ( 25.00001,    20,  25.00001)),
         exits
     )
     return obj
@@ -69,7 +69,7 @@ def five_by_five_edge(highlight_exits=False): # three exits
             Box((-24.75, 10.01,  -4.99), (-26,    21,   4.99), Pigment(color=Colors.Red)),
         )
     obj = Difference(
-        Box((-25,    0,     -25),    ( 25,    20,  25)),
+        Box((-25.00001,    0,     -25.00001),    ( 25.00001,    20,  25.00001)),
         exits,
     )
     return obj
@@ -83,7 +83,7 @@ def five_by_five_dead_end(highlight_exits=False): # one exit
             Box(( -4.99, 10.01, -24.75), (  4.99, 21, -26), Pigment(color=Colors.Red)),
         )
     obj = Difference(
-        Box((-25,    0,     -25),    ( 25,    20,  25)),
+        Box((-25.00001,    0,     -25.00001),    ( 25.00001,    20,  25.00001)),
         exits,
     )
     return obj
@@ -99,23 +99,25 @@ def five_by_ten(highlight_exits=False):
             Box(( 49.75, 10.01,  -2.499), ( 51,     21,   2.499), Pigment(color=Colors.Red)),
         )
     obj = Difference(
-        Box((-50, -0, -25), (50, 20, 25)),
+        Box((-50.00001, -0, -25.00001), (50.00001, 20, 25.00001)),
         exits
     )
     return obj
 
 def ten_by_ten(highlight_exits=False):
     obj = Difference(
-        Box((-50, -0, -50), (50, 20, 50)),
+        Box((-50.00001, -0, -50.00001), (50.00001, 20, 50.00001)),
     )
     return obj
 
 def ten_by_twenty(highlight_exits=False):
     obj = Difference(
+        Box((-100.00001, -0, -50.00001), (100.00001, 20, 50.00001)),
     )
     return obj
 
 def twenty_by_twenty(highlight_exits=False):
     obj = Difference(
+        Box((-100.00001, -0, -100.00001), (100.00001, 20, 100.00001)),
     )
     return obj
