@@ -111,6 +111,7 @@ def main():
     pov_file.include("stones.inc")
     pov_file.include("metals.inc")
     pov_file.include("functions.inc")
+    pov_file.include("shapes.inc")
     general(pov_file)
     ground(pov_file, offset=args.ground_offset)
     camera = Camera(
