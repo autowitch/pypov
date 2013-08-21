@@ -1,5 +1,5 @@
 from pypov.pov import Box, Difference, Texture, Pigment, Union
-from pypov.pov import Checker, Brick, Finish
+from pypov.pov import Checker, Brick, Finish, Normal
 from pypov.pov import Interior, Material
 from pypov.colors import Colors
 
@@ -57,4 +57,50 @@ wall_texture_1 = Texture(
     )
 )
 
+white_plaster = Texture(
+    Pigment(
+        color=Colors.Gray90,
+    ),
+    Normal(
+        bumps=0.15,
+    ),
+    Finish(
+        diffuse=0.9,
+        phong=0.2)
+)
 
+blue_plaster = Texture(
+    Pigment(
+        color=Colors.Blue,
+    ),
+    Normal(
+        bumps=0.15,
+    ),
+    Finish(
+        diffuse=0.9,
+        phong=0.2)
+)
+
+light_blue_plaster = Texture(
+    Pigment(
+        color=Colors.LightBlue,
+    ),
+    Normal(
+        bumps=0.15,
+    ),
+    Finish(
+        diffuse=0.9,
+        phong=0.2)
+)
+
+brown_plaster = Texture(
+    Pigment(
+        color=Colors.Brown,
+    ),
+    Normal(
+        bumps=0.15,
+    ),
+    Finish(
+        diffuse=0.9,
+        phong=0.2)
+)
