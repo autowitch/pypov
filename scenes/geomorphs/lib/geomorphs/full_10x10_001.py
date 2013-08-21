@@ -25,14 +25,14 @@ def full_10x10_001(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
     angle = 45
 
     nicho_colors = [
-            Colors.Gray20,
+            Colors.Gray10,
             Colors.Red,
             Colors.Orange,
             Colors.Yellow,
+            Colors.White,
             Colors.Green,
             Colors.Blue,
             Colors.Violet,
-            Colors.Gray90,
     ]
 
     for x in range(0, 8):
@@ -107,8 +107,8 @@ def full_10x10_001(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
                     Cylinder((0, 10, 0), (0, 21, 0), 32),
                 ),
                 Difference(
-                    Cylinder((0, 10.0002, 0), (0, 11, 0), 38.00001),
-                    Cylinder((0, 10.0002, 0), (0, 11, 0), 31.99999),
+                    Cylinder((0, 10.0002, 0), (0, 10.999999, 0), 38.00001),
+                    Cylinder((0, 10.0002, 0), (0, 10.999999, 0), 31.99999),
                     brown_plaster
                 ),
                 Difference(
@@ -151,7 +151,7 @@ def full_10x10_001(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
                 Box((22.5, 10.01, 45), (27.5, 21, 51)),
                 Box((-22.5, 10.01, 45), (-27.5, 21, 51)),
                 Box((-27.49999, 10, 45.0001), (27.49999, 21, 40.00001)),
-                Box((-2, 11, 41), (-5, 21, 35)),
+                Box((6, 11, 41), (-3, 21, 35), white_plaster),
                 # Rooms
                 Box((-48, 10, -48), (-32, 21, -32)),
 
@@ -167,6 +167,16 @@ def full_10x10_001(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
             columns,
             white_plaster,
 #            Texture(Pigment(color=Colors.Tan)),
+        ),
+        Union(
+            Cylinder((5, 11, 39), (5, 20, 39), 0.75),
+            Cylinder((-2, 11, 39), (-2, 20, 39), 0.75),
+            Box((4, 11, 40), (6, 12, 38)),
+            Box((-1, 11, 40), (-3, 12, 38)),
+            Box((4, 19, 40), (6, 20.0001, 38)),
+            Box((-1, 19, 40), (-3, 20.0001, 38)),
+#                Box((6, 11, 41), (-3, 21, 35), white_plaster),
+            white_plaster,
         ),
         Union(
             Cylinder((39, 10, 42), (39, 21, 42), 1),
