@@ -25,6 +25,7 @@ def general(pov_file):
 #            minimum_reuse = 0.015,
 #            brightness = 1,
 #            adc_bailout = 0.01/2,
+            media="on",
         ),
         assumed_gamma = 1.0,
         max_trace_level=100
