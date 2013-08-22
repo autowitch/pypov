@@ -9,7 +9,7 @@ from lib.textures import blue_plaster, brown_plaster
 from lib.metadata import Metadata
 from lib.util import float_range
 
-def full_10x10_002_info():
+def full_10x10_003_info():
     return Metadata("Basic corner room", "c2",
             description="Basic boring corner with a room", block_type="corner",
             bottom=0, top=20, size="5x5",
@@ -17,20 +17,24 @@ def full_10x10_002_info():
             dead_ends=False, entrance=False, has_rooms=True,
             passage_type="hewn", wet=False)
 
-def full_10x10_002(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
+def full_10x10_003(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
         cross_hatch_texture=cross_hatch_2):
     """docstring for gm02"""
 
-
+    #Box((-15, 8, -10), (15, 21, 36)), # columnade
     columns = Union()
-    for x in float_range(-25, 25, 2.5):
-        print x
+    for x in range (-8, 33, 4):
+        columns.append(Cylinder((-12, 8, x), (-12, 21, x), 1.0))
+        columns.append(Cylinder((12, 8, x), (12, 21, x), 1.0))
+        columns.append(Cylinder((-8, 8, x), (-8, 21, x), 1.0))
+        columns.append(Cylinder((8, 8, x), (8, 21, x), 1.0))
+        columns.append(Cylinder((-4, 8, x), (-4, 21, x), 1.0))
+        columns.append(Cylinder((4, 8, x), (4, 21, x), 1.0))
 
     geomorph = Union(
         Difference(
             Merge(
                 Object(ten_by_ten(), cross_hatch_texture),
-                Box((-26, -10, 33), (26, 0, -18)),
             ),
             Union(
                 # Halls
@@ -48,10 +52,31 @@ def full_10x10_002(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
                 Box((22.5, 10.01, 45), (27.5, 21, 51)),
                 Box((-22.5, 10.01, 45), (-27.5, 21, 51)),
 
-                # Pool
-                Box((-25, -5, 32), (25, 21, -17)),
                 wall_texture_1,
             ),
+            Union(
+                Box((-14, 10, -28), (14, 21, -42)), # court one
+                Box((-10, 9, -12), (10, 21, -26)), # court 2
+                Box((-15, 8, -10), (15, 21, 36)), # columnade
+                Box((-17, 9, -8), (-27, 21, 0)), # columnade side 1 rooms
+                Box((-17, 9, 2), (-27, 21, 12)), # columnade side 1 rooms
+                Box((-17, 9, 14), (-27, 21, 24)), # columnade side 1 rooms
+                Box((-17, 9, 26), (-27, 21, 36)), # columnade side 1 rooms
+                Box((17, 9, -8), (27, 21, 0)), # columnade side 2 rooms
+                Box((17, 9, 2), (27, 21, 12)), # columnade side 2 rooms
+                Box((17, 9, 14), (27, 21, 24)), # columnade side 2 rooms
+                Box((17, 9, 26), (27, 21, 36)), # columnade side 1 rooms
+                Box((-8, 7, 38), (8, 21, 47)), # inner sanctum
+                Box((-10, 8, 38), (-20, 21, 45)), # side chambe 1
+                Box((10, 8, 38), (20, 21, 45)), # side chambe 2
+                white_plaster,
+                rotate=(0, 11, 0),
+            )
+        ),
+        Object(
+            columns,
+            white_plaster,
+            rotate=(0, 11, 0),
         ),
         translate=translate,
         rotate=rotate
