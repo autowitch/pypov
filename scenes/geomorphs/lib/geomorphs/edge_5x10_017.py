@@ -42,6 +42,12 @@ def edge_5x10_017(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
                 Box(( -7, 10.00003, -10), (-17, 21, 2.50001)),
 
                 Box(( 10, 10.00003, 5), (35, 21, -15)),
+
+                Box(( 14, 10, 7), (32, 21, 22)),
+                Box(( 20, 10.001, 4), (24, 17, 8)),
+
+                Box(( -6, 10, 7), (12, 21, 22)),
+                Box((11, 10.0001, 12), (15, 17, 16)),
                 wall_texture_1
             ),
         ),
@@ -66,8 +72,8 @@ def edge_5x10_017(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
             ),
             Interior(ior=1.3,
                 dispersion=1.15,
-                fade_distance=1,
-                fade_power=2,
+                fade_distance=10,
+                fade_power=1001,
             ),
         ),
         translate=translate,
