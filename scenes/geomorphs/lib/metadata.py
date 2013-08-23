@@ -4,7 +4,7 @@ class Metadata(object):
             bottom=0, top=20, size="5x5",
             repeatable=True, fully_connected=False,
             dead_ends=False, entrance=False, has_rooms=True,
-            passage_type="hewn", wet=False):
+            passage_type="hewn", wet=False, multi_level=False, keywords=None):
 
         super(Metadata, self).__init__()
 
@@ -54,6 +54,13 @@ class Metadata(object):
 
         # Indicates that water is found in the tile
         self.wet = wet
+
+        self.multi_level = multi_level
+
+        if not keywords:
+            self.keywords = []
+        else:
+            self.keywords = keywords
 
     @property
     def deep(self):
