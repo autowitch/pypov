@@ -39,7 +39,7 @@ def edge_5x10_011(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
                 # Boulder supports
                 Box((-5, 20, 7), (5, 30, -7)),
                 Box((-19, 20, 7), (-9, 30, -7)),
-                Box((-31, 20, 7), (-21, 30, -7)),
+                Box((-33, 20, 7), (-23, 30, -7)),
                 cross_hatch_texture,
             ),
             Union(
@@ -67,7 +67,7 @@ def edge_5x10_011(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
                 Box((-4.5 - 14, 19, 5.5), (4.5 - 14, 31, -5.5)),
                 Box((-4.5 - 28, 19, 5.5), (4.5 - 28, 31, -5.5)),
 
-                Box((-33, 19, 5), (7, 31, -5)),
+                Box((-34, 19, 5), (7, 31, -5)),
 
                 wall_texture_1
             ),
