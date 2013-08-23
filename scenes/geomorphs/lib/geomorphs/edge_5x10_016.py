@@ -7,7 +7,7 @@ from lib.base import five_by_ten_edge
 from lib.textures import cross_hatch, cross_hatch_2, wall_texture_1
 from lib.metadata import Metadata
 
-def edge_5x10_015_info():
+def edge_5x10_016_info():
     return Metadata("Basic corner room", "c2",
             description="Basic boring corner with a room", block_type="corner",
             bottom=0, top=20, size="5x5",
@@ -15,7 +15,7 @@ def edge_5x10_015_info():
             dead_ends=False, entrance=False, has_rooms=True,
             passage_type="hewn", wet=False)
 
-def edge_5x10_015(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
+def edge_5x10_016(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
         cross_hatch_texture=cross_hatch_2):
     """docstring for gm02"""
 
@@ -37,12 +37,16 @@ def edge_5x10_015(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
 
                 Box((-12, 10, 12), (12, 21, 23)),
                 Box((-2.5, 10, 9.9999), (2.5, 18, 12.00001)),
+
+                Box((-12, 10.00001, -12), (12, 21, -23)),
+                Box((-2.5, 10.00001, -9.9999), (2.5, 18, -12.00001)),
                 wall_texture_1
             ),
         ),
         Union(
             Box((-15, 8, -1), (15, 10, 1)),
             Box((-1, 8, 1), (1, 10, 10)),
+            Box((-1, 8, -1), (1, 10, -10)),
             wall_texture_1
         ),
         translate=translate,
