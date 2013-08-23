@@ -1,6 +1,5 @@
-from pypov.pov import Texture, Pigment, Intersection, Cylinder, Merge
+from pypov.pov import Texture, Pigment, Intersection, Cylinder
 from pypov.pov import Union, Difference, Object, Box, Sphere
-from pypov.pov import Material, Finish, Normal, Interior
 
 from pypov.common import grey, white
 from pypov.colors import Colors
@@ -23,65 +22,43 @@ def edge_5x10_008(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
     geomorph = Union(
         Difference(
             Union(
-                Object(five_by_ten_edge(), cross_hatch_texture),
+                five_by_ten_edge(),
+                Box((-50, 0, -25), (50, -50, 25)),
+                cross_hatch_texture,
             ),
             Union(
                 # Halls
                 Box(( -22.5, 10.0001,  -12), ( -27.5, 21, -26)),
                 Box((  22.5, 10.0002,  2.50001), (  27.5, 21, -26)),
-                Box((  22.50001, 10.0004,  -2.5), (51, 21,   2.5)),
+                Box((  -51, 10,  -2.5), (51, 21,   2.5)),
+                Box((  -20, 10.0001,  -6), (20, 21,   6)),
+                Box((  -20, 8,  -6), (20, -45.0001,   6)),
+                Box((  -16, -45,  -5.9999), (-8, 21,   5.9999)),
+                Box((  16, -45,  -5.9999), (8, 21,   5.9999)),
+                Box((  4, -45,  -5.9999), (-4, 21,   5.9999)),
 
-                # End hall
-                Box((  -51, 10,  -2.5), (-35, 21,   2.5)),
-                # Two end rooms
-                Merge(
-                    Box((-10.00001, 10, -14), (15.0001, 21, -18)),
-                    Box((-10.00001, 10, -7), (15.0001, 21, -11)),
-                    Box((-10.00001, 10, 0), (15.0001, 21, -4)),
-                    Box((-10.00001, 10, 7), (15.0001, 21, 3)),
+                Box((  4, 11, 0), (8, 16, 8)),
+                Box((  -2, 12, 8), (14, 21, 22)),
+                Box((  -4, 12, 10), (-18, 21, 22)),
+                Box(( -5, 13, 14), (-1, 17, 18)),
 
-                    Box((-10, 10.0001, -18.0001), (-6, 21, 3.00001)),
-                    Box((1, 10.0001, -18.0001), (-3, 21, 3.00001)),
-                    Box((4, 10.0001, -18.0001), (8, 21, 3.00001)),
-                    Box((11, 10.0001, -18.0001), (15, 21, 3.00001)),
+                Box((  -4, 11, 0), (-8, 16, -8)),
+                Box((  2, 12, -8), (-14, 21, -22)),
 
-                    Box((-9.9999, 10.00002, -7), (-36, 21, -2)),
-                    Box((-32, 10.0003, -9), (-41, 21, 0)),
-                    rotate=(0, 6, 0)
-                ),
+                Box((27, 10, 5), (46, 21, 15)),
+                Box((27, 10, 14.9999), (32, 21, 23)),
+                Box((34, 10, 14.9999), (39, 21, 23)),
+                Box((41, 10, 14.9999), (46, 21, 23)),
+                Box((34, 10, 5.0001), (39, 21, 2.49999)),
 
-                Box((-42, 10, -10), (-29, 21, -21)),
-                Box((-39, 1, -13), (-32, 21, -18)),
-                Box((-30, 10.0002, -11), (-25, 18, -15)),
-
-                wall_texture_1,
+                Box((-18, 10, -9), (-40, 21, -20)),
+                Box((-42, 15, -15), (-45, 21, 0)),
+                Box((-42.001, 12.5, -15), (-39, 21, -12)),
+                wall_texture_1
             ),
         ),
-        Box((-40, 0.4, -12), (-31, 9.5, -19)),
-            Material(
-                Texture(
-                    Pigment(color="rgbt <0.2, 0.7, 0.3, 0.5>"),
-                    Finish(
-                        ambient=0,
-                        diffuse=0,
-                        reflection="{ 0.0, 1.0 fresnel on }",
-                        specular=0.4,
-                        roughness=0.0003
-                    ),
-                    Normal(
-                        # "function { f_ridged_mf(x, y, z, 0.1, 3.0, 7, 0.7, 0.7, 2) } 0.8 scale 0.13",
-                        "function { f_ridged_mf(x, y, z, 0.1, 3.0, 7, 0.7, 0.7, 2) } 0.12 scale 0.13",
-                    )
-                ),
-                Interior(
-                    ior=1.3,
-                    media = "{ absorption <0.8, 0.6, 1.0, 0.5>  " +
-                        "scattering { 3 <0.5, 0.65, 0.4> } } ",
-                    #fade_distance = 4,
-                    #fade_power = 1001,
-                    #fade_color = (0.8, 0.2, 0.2, 0.5),
-                ),
-            ),
+        Cylinder((-24, 10, -14.5), (-24, 21, -14.5), 1.5, wall_texture_1),
+        Cylinder((-34, 10, -14.5), (-34, 21, -14.5), 1.5, wall_texture_1),
         translate=translate,
         rotate=rotate
     )
