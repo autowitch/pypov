@@ -21,7 +21,7 @@ def full_5x5_001_info():
             has_rooms=False,
             passage_type="hewn",
             wet=False,
-            multiple_level=False,
+            multi_level=False,
             keywords=['basic', 'hallways', 'boring'])
 
 def full_5x5_001(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,

@@ -2,6 +2,7 @@
 
 import os
 import sys
+import re
 # Assumes that a symlink to the pov modules is in the lib dir
 
 import argparse
@@ -32,6 +33,9 @@ class Dungeon(object):
 
     def load_geomorph_modules(self, geomorphs):
         modules = []
+        count = 0
+        fail_count = 0
+        incomplete_count = 0
 
         for x in geomorphs:
             geomorph_module = None
@@ -39,30 +43,183 @@ class Dungeon(object):
                 geomorph_module = __import__('lib.geomorphs.%s' % x)
                 module = getattr(geomorph_module.geomorphs, x)
                 geomorph_function = getattr(module, x)
-                info_function = getattr(module, '%s_info' % x)
-                modules.append((geomorph_function, info_function()))
-                print "Loaded: %s" % x
+                geomorph_info = getattr(module, '%s_info' % x)()
+
+                if 'INCOMPLETE' in geomorph_info.keywords:
+                    print "WARNING: %s is incomplete!" % x
+                    incomplete_count += 1
+                    continue
+
+                geomorph = (x, geomorph_function, geomorph_info)
+                modules.append(geomorph)
+
+                print "Loaded: %s (%s): %s" % (x, geomorph_info.shortcode, \
+                        geomorph_info.name)
+                count += 1
             except ImportError, e:
                 print 'ERROR: geomorph %s could not be loaded' % (x)
                 print e
+                fail_count += 1
             except AttributeError, e:
                 print 'ERROR: geomorph %s has missing functions' % (x)
                 print e
+                fail_count += 1
+
+        print "%d total geomorphs loaded" % count
+        print "%d are incomplete and were skipped" % incomplete_count
+        print "%d had problems and could not be loaded" % fail_count
         return modules
+
+    def audit_geomorph(self, name, metadata):
+        rc = True
+
+        if metadata.block_type not in ['dead end', 'corner', 'pipe', 'edge', 'full']:
+            print "WARNING: %s has invalid block type: %s" % metadata.block_type
+            rc = False
+
+        if metadata.size not in ['5x5', '5x10', '10x10', '10x20', '20x20']:
+            print "WARNING: %s has invalid size: %s" % metadata.size
+            rc = False
+
+        if metadata.block_type in ['dead end', 'corner', 'pipe'] and \
+                metadata.size != '5x5':
+            print "WARNING: %s is %s and has a type of %s (1)" % (name, metadata.size, \
+                    metadata.block_type)
+            rc = False
+
+        if metadata.block_type == 'edge' and metadata.size not in ['5x5', '5x10']:
+            print "WARNING: %s is %s and has a type of %s (2)" % (name, metadata.size, \
+                    metadata.block_type)
+            rc = False
+
+        if 'corner' in name and metadata.block_type is not 'corner':
+            print "WARNING: Block %s has 'corner' in name, but block type is %s" % \
+                    (name, metadata.block_type)
+            rc = False
+        if 'edge' in name and metadata.block_type is not 'edge':
+            print "WARNING: Block %s has 'edge' in name, but block type is %s" % \
+                    (name, metadata.block_type)
+            rc = False
+        if 'full' in name and metadata.block_type is not 'full':
+            print "WARNING: Block %s has 'full' in name, but block type is %s" % \
+                    (name, metadata.block_type)
+            rc = False
+        if 'dead_end' in name and metadata.block_type is not 'dead end':
+            print "WARNING: Block %s has 'dead_end' in name, but block type is %s" % \
+                    (name, metadata.block_type)
+            rc = False
+        if 'pipe' in name and metadata.block_type is not 'pipe':
+            print "WARNING: Block %s has 'pipe' in name, but block type is %s" % \
+                    (name, metadata.block_type)
+            rc = False
+
+        if '5x5' in name and metadata.size is not '5x5':
+            print "WARNING: Block %s has '5x5' in name, but block size is %s" % \
+                    (name, metadata.size)
+            rc = False
+        if '5x10' in name and metadata.size is not '5x10':
+            print "WARNING: Block %s has '5x10' in name, but block size is %s" % \
+                    (name, metadata.size)
+            rc = False
+        if '10x10' in name and metadata.size is not '10x10':
+            print "WARNING: Block %s has '10x10' in name, but block size is %s" % \
+                    (name, metadata.size)
+            rc = False
+        if '10x20' in name and metadata.size is not '10x20':
+            print "WARNING: Block %s has '10x20' in name, but block size is %s" % \
+                    (name, metadata.size)
+            rc = False
+        if '20x20' in name and metadata.size is not '20x20':
+            print "WARNING: Block %s has '20x20' in name, but block size is %s" % \
+                    (name, metadata.size)
+            rc = False
+
+        if not re.match("^(corner|dead_end|edge|full|pipe)_(entrance_)?(5x5|5x10|10x10|10x20|20x20)_[0-9]+(-.*$)?", name):
+            print "WARNING: %s name is in wrong format" % name
+            print '         it should match "^(corner|dead_end|edge|full|pipe)_(entrance_)?(5x5|5x10|10x10|10x20|20x20)_[0-9]+(-.*$)?"'
+            rc = False
+
+        if 'entrance' in name and not metadata.entrance:
+            print "WARNING: Block has 'entrance' in name, but block type is not an entrance" % name
+            rc = False
+
+
+        return rc
+
 
     def arrange_geomorphs(self, geomorphs):
         arranged = {
-            '5x5':{'dead_end':[], 'corner':[], 'pipe':[], 'edge':[], 'full':[]},
+            '5x5':{'dead end':[], 'corner':[], 'pipe':[], 'edge':[], 'full':[]},
             '5x10':{'edge':[], 'full':[]},
             '10x10':{'full':[]},
             '10x20':{'full':[]},
             '20x20':{'full':[]}
         }
+        short_codes = {}
+        audit_fail_count = 0
 
-        for (geomorph, metadata) in geomorphs:
-            print metadata.__dict__
+        for (name, geomorph, metadata) in geomorphs:
+            if not self.audit_geomorph(name, metadata):
+                audit_fail_count += 1
 
-        return arranged
+            if not metadata.shortcode in short_codes:
+                short_codes[metadata.shortcode] = (geomorph, metadata)
+            else:
+                print "WARNING: %s shortcode duplicated in %s" % \
+                        (metadata.shortcode, name)
+
+            if metadata.size == '5x5':
+                if metadata.block_type == 'full':
+                    arranged['5x5']['full'].append((name, geomorph, metadata))
+                elif metadata.block_type == 'edge':
+                    arranged['5x5']['edge'].append((name, geomorph, metadata))
+                elif metadata.block_type == 'corner':
+                    arranged['5x5']['corner'].append((name, geomorph, metadata))
+                elif metadata.block_type == 'pipe':
+                    arranged['5x5']['pipe'].append((name, geomorph, metadata))
+                elif metadata.block_type == 'dead_end':
+                    arranged['5x5']['dead_end'].append((name, geomorph, metadata))
+                else:
+                    print "ERROR: %s attemted to insert block type %s into 5x5" % \
+                            (name, metadata.block_type)
+
+            elif metadata.size == '5x10':
+                if metadata.block_type == 'full':
+                    arranged['5x10']['full'].append((name, geomorph, metadata))
+                elif metadata.block_type == 'edge':
+                    arranged['5x10']['edge'].append((name, geomorph, metadata))
+                else:
+                    print "ERROR: %s attemted to insert block type %s into 5x10" % \
+                            (name, metadata.block_type)
+
+            elif metadata.size == '10x10':
+                if metadata.block_type == 'full':
+                    arranged['10x10']['full'].append((name, geomorph, metadata))
+                else:
+                    print "ERROR: %s attemted to insert block type %s into 10x10 full" % \
+                            (name, metadata.block_type)
+
+            elif metadata.size == '10x20':
+                if metadata.block_type == 'full':
+                    arranged['10x20']['full'].append((name, geomorph, metadata))
+                else:
+                    print "ERROR: %s attemted to insert block type %s into 10x20 full" % \
+                            (name, metadata.block_type)
+
+            elif metadata.size == '20x20':
+                if metadata.block_type == 'full':
+                    arranged['20x20']['full'].append((name, geomorph, metadata))
+                else:
+                    print "ERROR: %s Attemted to insert block type %s into 20x20 full" % \
+                            (name, metadata.block_type)
+
+            else:
+                print "ERROR: %s - unrecognized block size: %s" % (name, metadata.size)
+
+
+        print "%d geomorphs have potential problems" % audit_fail_count
+
+        return arranged, short_codes
 
 
 

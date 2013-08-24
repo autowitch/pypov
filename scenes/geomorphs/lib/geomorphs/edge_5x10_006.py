@@ -10,7 +10,7 @@ from lib.metadata import Metadata
 def edge_5x10_006_info():
     return Metadata("Temple", "e6",
             description="Angled temple with multiple columns",
-            block_type="corner",
+            block_type="edge",
             bottom=0, top=20,
             size="5x10",
             repeatable=False,
