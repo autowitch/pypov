@@ -9,7 +9,7 @@ from lib.textures import cross_hatch, cross_hatch_2, wall_texture_1
 from lib.metadata import Metadata
 
 def corner_5x5_013_info():
-    return Metadata("Basic diamond shaped room", "c14",
+    return Metadata("Basic diamond shaped room", "c13",
             description="Basic diamond shaped room",
             block_type="corner",
             bottom=0, top=20,

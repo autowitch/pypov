@@ -1,7 +1,7 @@
 class Metadata(object):
     """docstring for Metadata"""
-    def __init__(self, name, shortcode, description=None, block_type="normal",
-            bottom=0, top=20, size="5x5",
+    def __init__(self, name, shortcode, description=None, block_type="unknown",
+            bottom=0, top=20, size="unknown",
             repeatable=True, fully_connected=False,
             dead_ends=False, entrance=False, has_rooms=True,
             passage_type="hewn", wet=False, multi_level=False, keywords=None):
