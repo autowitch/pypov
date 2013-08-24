@@ -7,12 +7,20 @@ from lib.textures import cross_hatch, cross_hatch_2, wall_texture_1
 from lib.metadata import Metadata
 
 def full_5x5_003_info():
-    return Metadata("Basic four entrance room", "f2",
-            description="Basic four entrance room", block_type="normal",
-            bottom=0, top=20, size="5x5",
-            repeatable=True, fully_connected=True,
-            dead_ends=False, entrance=False, has_rooms=True,
-            passage_type="hewn", wet=False)
+    return Metadata("Basic stepped room", "f3",
+            description="Basic stepped room",
+            block_type="full",
+            bottom=0, top=20,
+            size="5x5",
+            repeatable=True,
+            fully_connected=True,
+            dead_ends=False,
+            entrance=False,
+            has_rooms=True,
+            passage_type="hewn",
+            wet=False,
+            multi_level=False,
+            keywords=['basic', 'simple', 'room'])
 
 def full_5x5_003(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
         cross_hatch_texture=cross_hatch_2):

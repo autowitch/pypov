@@ -14,10 +14,17 @@ def corner_5x5_005_info():
     return Metadata("Corner with side rooms", "c5",
             description="Corner with two small side rooms",
             block_type="corner",
-            bottom=0, top=20, size="5x5",
-            repeatable=True, fully_connected=True,
-            dead_ends=False, entrance=False, has_rooms=True,
-            passage_type="hewn", wet=False)
+            bottom=0, top=20,
+            size="5x5",
+            repeatable=True,
+            fully_connected=True,
+            dead_ends=False,
+            entrance=False,
+            has_rooms=True,
+            passage_type="hewn",
+            wet=False,
+            multi_level=False,
+            keywords=['multiple rooms', 'basic', 'side chambers'])
 
 def corner_5x5_005(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
         cross_hatch_texture=cross_hatch_2):

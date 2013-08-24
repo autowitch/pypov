@@ -14,10 +14,17 @@ def corner_entrance_5x5_002_info():
     return Metadata("Corner with vertical entrance", "ce2",
             description="Corner with a sprial staircase leading to an entrance",
             block_type="corner",
-            bottom=0, top=20, size="5x5",
-            repeatable=False, fully_connected=True,
-            dead_ends=False, entrance=True, has_rooms=True,
-            passage_type="hewn", wet=False)
+            bottom=0, top=20,
+            size="5x5",
+            repeatable=False,
+            fully_connected=True,
+            dead_ends=False,
+            entrance=True,
+            has_rooms=True,
+            passage_type="hewn",
+            wet=False,
+            multi_level=True,
+            keywords=['entrance', 'side chambers', 'multiple rooms', 'stairway', 'spiral staircase'])
 
 def corner_entrance_5x5_002(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
         cross_hatch_texture=cross_hatch_2):

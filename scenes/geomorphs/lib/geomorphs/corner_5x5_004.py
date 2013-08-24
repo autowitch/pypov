@@ -12,10 +12,17 @@ def corner_5x5_004_info():
     return Metadata("Corner room with pit", "c4",
             description="Two passages open up into a room that is filled with a 100' deep stepped pit.",
             block_type="corner",
-            bottom=-100, top=20, size="5x5",
-            repeatable=False, fully_connected=True,
-            dead_ends=False, entrance=False, has_rooms=True,
-            passage_type="hewn", wet=False)
+            bottom=-100, top=20,
+            size="5x5",
+            repeatable=False,
+            fully_connected=True,
+            dead_ends=False,
+            entrance=False,
+            has_rooms=True,
+            passage_type="hewn",
+            wet=False,
+            multi_level=True,
+            keywords=['corner', 'pit', 'trap', 'deep'])
 
 
 def corner_5x5_004(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,

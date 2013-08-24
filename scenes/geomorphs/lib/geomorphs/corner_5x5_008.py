@@ -10,12 +10,20 @@ from lib.util import float_range
 
 
 def corner_5x5_008_info():
-    return Metadata("Basic four entrance room", "f2",
-            description="Basic four entrance room", block_type="normal",
-            bottom=0, top=20, size="5x5",
-            repeatable=True, fully_connected=True,
-            dead_ends=False, entrance=False, has_rooms=True,
-            passage_type="hewn", wet=False)
+    return Metadata("Room containing stepped pillar", "c8",
+            description="Room containing a stepped structure (similar to one seen in the Paris catcombs",
+            block_type="corner",
+            bottom=0, top=20,
+            size="5x5",
+            repeatable=True,
+            fully_connected=True,
+            dead_ends=False,
+            entrance=False,
+            has_rooms=True,
+            passage_type="hewn",
+            wet=False,
+            multi_level=False,
+            keywords=['room', 'odd', 'monument'])
 
 def corner_5x5_008(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
         cross_hatch_texture=cross_hatch_2):

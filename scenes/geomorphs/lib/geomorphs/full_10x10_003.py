@@ -10,12 +10,20 @@ from lib.metadata import Metadata
 from lib.util import float_range
 
 def full_10x10_003_info():
-    return Metadata("Basic corner room", "c2",
-            description="Basic boring corner with a room", block_type="corner",
-            bottom=0, top=20, size="5x5",
-            repeatable=True, fully_connected=True,
-            dead_ends=False, entrance=False, has_rooms=True,
-            passage_type="hewn", wet=False)
+    return Metadata("White Temple", "ff3",
+            description="White columned temple",
+            block_type="full",
+            bottom=0, top=20,
+            size="10x10",
+            repeatable=False,
+            fully_connected=False,
+            dead_ends=True,
+            entrance=False,
+            has_rooms=True,
+            passage_type="hewn",
+            wet=False,
+            multi_level=False,
+            keywords=['INCOMPLETE', 'temple', 'white', 'complex', 'columns', 'multiple rooms'])
 
 def full_10x10_003(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
         cross_hatch_texture=cross_hatch_2):
