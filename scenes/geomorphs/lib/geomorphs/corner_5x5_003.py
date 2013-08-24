@@ -12,10 +12,17 @@ def corner_5x5_003_info():
     return Metadata("Basic corner room", "c3",
             description="Basic boring corner with a room. This one has columns. Yay!",
             block_type="corner",
-            bottom=0, top=20, size="5x5",
-            repeatable=True, fully_connected=True,
-            dead_ends=False, entrance=False, has_rooms=True,
-            passage_type="hewn", wet=False)
+            bottom=0, top=20,
+            size="5x5",
+            repeatable=True,
+            fully_connected=True,
+            dead_ends=False,
+            entrance=False,
+            has_rooms=True,
+            passage_type="hewn",
+            wet=False,
+            multi_level=False,
+            keywords=['columns', 'room', 'basic'])
 
 def corner_5x5_003(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
         cross_hatch_texture=cross_hatch_2):

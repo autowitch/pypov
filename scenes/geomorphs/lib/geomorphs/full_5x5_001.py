@@ -10,11 +10,19 @@ from lib.metadata import Metadata
 
 def full_5x5_001_info():
     return Metadata("Basic four way intersection", "f1",
-            description="Basic four way intersection", block_type="normal",
-            bottom=0, top=20, size="5x5",
-            repeatable=True, fully_connected=True,
-            dead_ends=False, entrance=False, has_rooms=False,
-            passage_type="hewn", wet=False)
+            description="Basic four way intersection",
+            block_type="full",
+            bottom=0, top=20,
+            size="5x5",
+            repeatable=True,
+            fully_connected=True,
+            dead_ends=False,
+            entrance=False,
+            has_rooms=False,
+            passage_type="hewn",
+            wet=False,
+            multiple_level=False,
+            keywords=['basic', 'hallways', 'boring'])
 
 def full_5x5_001(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
         cross_hatch_texture=cross_hatch_2):

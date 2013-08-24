@@ -8,12 +8,20 @@ from lib.textures import cross_hatch, cross_hatch_2, wall_texture_1
 from lib.metadata import Metadata
 
 def edge_5x10_003_info():
-    return Metadata("Basic corner room", "c2",
-            description="Basic boring corner with a room", block_type="corner",
-            bottom=0, top=20, size="5x5",
-            repeatable=True, fully_connected=True,
-            dead_ends=False, entrance=False, has_rooms=True,
-            passage_type="hewn", wet=False)
+    return Metadata("Non connected edge passages", "e3",
+            description="Non connected edge passages",
+            block_type="edge",
+            bottom=0, top=20,
+            size="5x10",
+            repeatable=True,
+            fully_connected=False,
+            dead_ends=False,
+            entrance=False,
+            has_rooms=False,
+            passage_type="hewn",
+            wet=False,
+            multi_level=False,
+            keywords=['passages', 'boring', 'basic'])
 
 def edge_5x10_003(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
         cross_hatch_texture=cross_hatch_2):

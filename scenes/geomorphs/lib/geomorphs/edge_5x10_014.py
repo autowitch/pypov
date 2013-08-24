@@ -8,12 +8,20 @@ from lib.textures import cross_hatch, cross_hatch_2, wall_texture_1
 from lib.metadata import Metadata
 
 def edge_5x10_014_info():
-    return Metadata("Basic corner room", "c2",
-            description="Basic boring corner with a room", block_type="corner",
-            bottom=0, top=20, size="5x5",
-            repeatable=True, fully_connected=True,
-            dead_ends=False, entrance=False, has_rooms=True,
-            passage_type="hewn", wet=False)
+    return Metadata("Pit with crossing bridges", "e14",
+            description="Deep with with bridges crossing both it and each other",
+            block_type="edge",
+            bottom=-50, top=20,
+            size="5x10",
+            repeatable=False,
+            fully_connected=True,
+            dead_ends=False,
+            entrance=False,
+            has_rooms=True,
+            passage_type="hewn",
+            wet=False,
+            multi_level=False,
+            keywords=['pit', 'bridges', 'bridge', 'arch', 'crossing'])
 
 def edge_5x10_014(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
         cross_hatch_texture=cross_hatch_2):

@@ -10,12 +10,20 @@ from lib.util import float_range
 
 
 def corner_5x5_007_info():
-    return Metadata("Basic four entrance room", "f2",
-            description="Basic four entrance room", block_type="normal",
-            bottom=0, top=20, size="5x5",
-            repeatable=True, fully_connected=True,
-            dead_ends=False, entrance=False, has_rooms=True,
-            passage_type="hewn", wet=False)
+    return Metadata("Terminating rooms with a cage", "c7",
+            description="Terminating rooms with a cage",
+            block_type="corner",
+            bottom=0, top=20,
+            size="5x5",
+            repeatable=False,
+            fully_connected=False,
+            dead_ends=True,
+            entrance=False,
+            has_rooms=True,
+            passage_type="hewn",
+            wet=False,
+            multi_level=False,
+            keywords=['cage', 'prison', 'rust', 'metal', 'dead ends'])
 
 def corner_5x5_007(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
         cross_hatch_texture=cross_hatch_2):
