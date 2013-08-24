@@ -12,13 +12,20 @@ from lib.metadata import Metadata
 from lib.elements.stairways import circular_stairs
 
 def corner_entrance_5x5_001_info():
-    return Metadata("Corner with horizontal entrance", "ce2",
+    return Metadata("Corner with horizontal entrance", "ce1",
             description="Corner with a horzontal entrance",
             block_type="corner",
-            bottom=0, top=20, size="5x5",
-            repeatable=False, fully_connected=True,
-            dead_ends=False, entrance=True, has_rooms=True,
-            passage_type="hewn", wet=False)
+            bottom=0, top=20,
+            size="5x5",
+            repeatable=False,
+            fully_connected=True,
+            dead_ends=False,
+            entrance=True,
+            has_rooms=True,
+            passage_type="hewn",
+            wet=False,
+            multi_level=False,
+            keywords=['entrance', 'side chambers', 'multiple rooms'])
 
 def corner_entrance_5x5_001(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
         cross_hatch_texture=cross_hatch_2):

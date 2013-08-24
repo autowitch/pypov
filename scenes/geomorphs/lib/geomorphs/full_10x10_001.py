@@ -9,12 +9,20 @@ from lib.textures import blue_plaster, brown_plaster
 from lib.metadata import Metadata
 
 def full_10x10_001_info():
-    return Metadata("Basic corner room", "c2",
-            description="Basic boring corner with a room", block_type="corner",
-            bottom=0, top=20, size="5x5",
-            repeatable=True, fully_connected=True,
-            dead_ends=False, entrance=False, has_rooms=True,
-            passage_type="hewn", wet=False)
+    return Metadata("Circular Temple", "ff1",
+            description="Circular white temple with colored nichos",
+            block_type="full",
+            bottom=0, top=20,
+            size="10x10",
+            repeatable=False,
+            fully_connected=False,
+            dead_ends=True,
+            entrance=False,
+            has_rooms=True,
+            passage_type="hewn",
+            wet=False,
+            multi_level=False,
+            keywords=['complex', 'temple', 'white', 'circular', 'layered', 'complex', 'nichos', 'rainbow', 'columns'])
 
 def full_10x10_001(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
         cross_hatch_texture=cross_hatch_2):
