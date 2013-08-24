@@ -7,7 +7,7 @@ from lib.textures import cross_hatch, cross_hatch_2, wall_texture_1
 from lib.metadata import Metadata
 
 def full_5x5_002_info():
-    return Metadata("Basic four entrance room", "f2",
+    return Metadata("Basic four entrance room", "ff2",
             description="Basic four entrance room",
             block_type="full",
             bottom=0, top=20,
