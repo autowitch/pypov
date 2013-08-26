@@ -3,16 +3,22 @@
 import os
 import sys
 import re
+import random
 # Assumes that a symlink to the pov modules is in the lib dir
 
 import argparse
-from pypov.pov import File, Settings, POV, parse_args
+from pypov.pov import File, Settings, POV, parse_args, Merge
 
 class Dungeon(object):
     """docstring for Dungeon"""
-    def __init__(self):
+    def __init__(self, seed=None):
         super(Dungeon, self).__init__()
 
+        if not seed:
+            a = random.SystemRandom()
+            seed = a.randint(1, 1<<32)
+        print "Using seed: %d" % seed
+        random.seed(seed)
 
     def find_geomorphs(self):
         path = os.path.realpath(__file__)
@@ -221,6 +227,33 @@ class Dungeon(object):
 
         return arranged, short_codes
 
+    def initialize_map(self, xsize=2, zsize=2):
+        print "Initializing map"
+        new_map = [
+                [ False for x in range(xsize + 2) ]
+                for z in range(zsize + 2)
+        ]
+        return new_map
+
+    def place_corners(self, povobj, map, geomorphs):
+        return povobj, map
+
+    def place_sides(self, povobj, map, geomorphs):
+        return povobj, map
+
+    def place_center(self, povobj, map, geomorphs):
+        return povobj, map
+
+    def create_random_dungeon(self, geomorphs, xsize=2, zsize=2):
+        map = self.initialize_map(xsize, zsize)
+        povobj = Merge()
+
+        (povobj, map) = self.place_corners(povobj, map, geomorphs)
+        (povobj, map) = self.place_sides(povobj, map, geomorphs)
+        (povobj, map) = self.place_center(povobj, map, geomorphs)
+
+        return povobj
+
 
 
     #def foo(self):
@@ -305,11 +338,18 @@ def main():
                         dest='rotation',
                         metavar=('X', 'Y', 'Z'),
                         help='Set camera location')
+    parser.add_argument('-s', '--seed',
+                        type=int,
+                        default=None,
+                        dest='seed',
+                        metavar='INT',
+                        help='Seed the random number generator with this value')
     args = parse_args(parser)
 
-    d = Dungeon()
+    d = Dungeon(seed=args.seed)
     geomorphs = d.load_geomorph_modules(d.find_geomorphs())
-    d.arrange_geomorphs(geomorphs)
+    geomorphs = d.arrange_geomorphs(geomorphs)
+    d.create_random_dungeon(geomorphs)
     #pov_file = File("dungeon.pov")
     #pov_file.include("colors.inc")
     #pov_file.include("stones.inc")
