@@ -235,22 +235,23 @@ class Dungeon(object):
         ]
         return new_map
 
-    def place_corners(self, povobj, map, geomorphs):
-        return povobj, map
+    def place_corners(self, povobj, dungeon_map, geomorphs, xsize=2, zsize=2):
+        return povobj, dungeon_map
 
-    def place_sides(self, povobj, map, geomorphs):
-        return povobj, map
+    def place_sides(self, povobj, dungeon_map, geomorphs, xsize=2, zsize=2):
+        return povobj, dungeon_map
 
-    def place_center(self, povobj, map, geomorphs):
-        return povobj, map
+    def place_center(self, povobj, dungeon_map, geomorphs, xsize=2, zsize=2):
+        return povobj, dungeon_map
 
-    def create_random_dungeon(self, geomorphs, xsize=2, zsize=2):
-        map = self.initialize_map(xsize, zsize)
-        povobj = Merge()
+    def create_random_dungeon(self, geomorphs, xsize=2, zsize=2, povobj=None):
+        dungeon_map = self.initialize_map(xsize, zsize)
+        if not povobj:
+            povobj = Merge()
 
-        (povobj, map) = self.place_corners(povobj, map, geomorphs)
-        (povobj, map) = self.place_sides(povobj, map, geomorphs)
-        (povobj, map) = self.place_center(povobj, map, geomorphs)
+        (povobj, dungeon_map) = self.place_corners(povobj, dungeon_map, geomorphs, xsize, zsize)
+        (povobj, dungeon_map) = self.place_sides(povobj, dungeon_map, geomorphs, xsize, zsize)
+        (povobj, dungeon_map) = self.place_center(povobj, dungeon_map, geomorphs, xsize, zsize)
 
         return povobj
 
