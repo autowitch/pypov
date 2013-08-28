@@ -29,7 +29,6 @@ def full_10x10_002(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
         cross_hatch_texture=cross_hatch_2):
     """docstring for gm02"""
 
-
     columns = Union()
     for x in range(-25, 30, 10):
         for z in range(-17, 37, 10):
