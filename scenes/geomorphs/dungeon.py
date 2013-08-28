@@ -154,9 +154,7 @@ class Dungeon(object):
             print "WARNING: Block has 'entrance' in name, but block type is not an entrance" % name
             rc = False
 
-
         return rc
-
 
     def arrange_geomorphs(self, geomorphs):
         arranged = {
@@ -240,36 +238,53 @@ class Dungeon(object):
         ]
         return new_map
 
-    def place_corners(self, povobj, dungeon_map, geomorphs, xsize=2, zsize=2,
-            earth_texture=cross_hatch_2):
+    def choose_geomorph(self, available, usage):
+        unused = filter(lambda (name, geomorph, metadata): \
+                name not in usage or usage[name] == 0, available)
+
+        if unused:
+            (name, geomorph, metadata) = random.choice(unused)
+        else:
+            print "Resetting usage counts"
+            for (name, geomorph, metadata) in available:
+                usage[name] = 0
+            (name, geomorph, metadata) = random.choice(available)
+
+        if name not in usage:
+            usage[name] = 0
+        usage[name] += 1
+
+        return (name, geomorph, metadata, usage)
+
+    def place_corners(self, povobj, dungeon_map, geomorphs, usage,
+                      xsize=2, zsize=2, earth_texture=cross_hatch_2):
+
+        print "Placing corners"
         offset = [
-                "rotate <0, 180, 0> translate <0, 0, 0>",
-                "rotate <0, 90, 0> translate <%d, 0, 0>" % (xsize * 100 + 50),
-                "rotate <0, 0, 0> translate <%d, 0, %d>" % (xsize * 100 + 50, zsize * 100 + 50),
-                "rotate <0, 270, 0> translate <0, 0, %d>" % (zsize * 100 + 50),
+            "rotate <0, 180, 0> translate <0, 0, 0>",
+            "rotate <0, 90, 0> translate <%d, 0, 0>" % (xsize * 100 + 50),
+            "rotate <0, 0, 0> translate <%d, 0, %d>" % (xsize * 100 + 50, zsize * 100 + 50),
+            "rotate <0, 270, 0> translate <0, 0, %d>" % (zsize * 100 + 50),
         ]
-        # rotations=[(0, 180, 0), (0, 90, 0), (0, 0, 0), (0, 270, 0)]
-        # translations=[(0, 0, 0),
-        #         (xsize * 100 + 50, 0, 0),
-        #         (xsize * 100 + 50, 0, zsize * 100 + 50),
-        #         (0, 0, zsize * 100 + 50)]
+
         for x in range(0, 4):
-            (name, geomorph, metadata) = random.choice(geomorphs['5x5']['corner'])
-            print name
+            (name, geomorph, metadata, usage) = self.choose_geomorph(geomorphs['5x5']['corner'], usage)
+            print "    %s" % name
             povobj.append(
                 Object(
                     geomorph(cross_hatch_texture=earth_texture),
                     offset[x],
                 )
             )
-        return povobj, dungeon_map
+        return povobj, dungeon_map, usage
 
-
-    def place_sides(self, povobj, dungeon_map, geomorphs, xsize=2, zsize=2,
+    def place_sides(self, povobj, dungeon_map, geomorphs, usage, xsize=2, zsize=2,
             earth_texture=cross_hatch_2):
 
+        print "Placing edges"
         for x in range(0, xsize):
-            (name, geomorph, metadata) = random.choice(geomorphs['5x10']['edge'])
+            (name, geomorph, metadata, usage) = self.choose_geomorph(geomorphs['5x10']['edge'], usage)
+            print "    %s" % name
             povobj.append(
                 Object(
                     geomorph(cross_hatch_texture=earth_texture),
@@ -277,7 +292,8 @@ class Dungeon(object):
                 )
             )
 
-            (name, geomorph, metadata) = random.choice(geomorphs['5x10']['edge'])
+            (name, geomorph, metadata, usage) = self.choose_geomorph(geomorphs['5x10']['edge'], usage)
+            print "    %s" % name
             povobj.append(
                 Object(
                     geomorph(cross_hatch_texture=earth_texture),
@@ -286,14 +302,16 @@ class Dungeon(object):
             )
 
         for z in range(0, zsize):
-            (name, geomorph, metadata) = random.choice(geomorphs['5x10']['edge'])
+            (name, geomorph, metadata, usage) = self.choose_geomorph(geomorphs['5x10']['edge'], usage)
+            print "    %s" % name
             povobj.append(
                 Object(
                     geomorph(cross_hatch_texture=earth_texture),
                     "rotate <0, 270, 0> translate <0, 0, %d>" % (z * 100 + 75),
                 )
             )
-            (name, geomorph, metadata) = random.choice(geomorphs['5x10']['edge'])
+            (name, geomorph, metadata, usage) = self.choose_geomorph(geomorphs['5x10']['edge'], usage)
+            print "    %s" % name
             povobj.append(
                 Object(
                     geomorph(cross_hatch_texture=earth_texture),
@@ -301,18 +319,22 @@ class Dungeon(object):
                 )
             )
 
-        return povobj, dungeon_map
+        return povobj, dungeon_map, usage
 
-    def create_full_size_tile(self, geomorphs,
+    def create_full_size_tile(self, geomorphs, usage,
             earth_texture=cross_hatch_2):
+
+        rooms = None
         if random.randint(0, 100) <= 20:
-            (name, geomorph, metadata) = random.choice(geomorphs['10x10']['full'])
-            return geomorph(cross_hatch_texture=earth_texture)
+            (name, geomorph, metadata, usage) = self.choose_geomorph(geomorphs['10x10']['full'], usage)
+            print "    %s" % name
+            rooms = geomorph(cross_hatch_texture=earth_texture)
+
         else:
             rooms = Union()
 
-            (name, geomorph, metadata) = random.choice(geomorphs['5x5']['full'])
-            geomorph = geomorphs['5x5']['full'][0][1]
+            (name, geomorph, metadata, usage) = self.choose_geomorph(geomorphs['5x5']['full'], usage)
+            print "    %s" % name
             rooms.append(
                 Object(
                     geomorph(cross_hatch_texture=earth_texture),
@@ -320,7 +342,8 @@ class Dungeon(object):
                 ),
             )
 
-            (name, geomorph, metadata) = random.choice(geomorphs['5x5']['full'])
+            (name, geomorph, metadata, usage) = self.choose_geomorph(geomorphs['5x5']['full'], usage)
+            print "    %s" % name
             rooms.append(
                 Object(
                     geomorph(cross_hatch_texture=earth_texture),
@@ -328,7 +351,8 @@ class Dungeon(object):
                 ),
             )
 
-            (name, geomorph, metadata) = random.choice(geomorphs['5x5']['full'])
+            (name, geomorph, metadata, usage) = self.choose_geomorph(geomorphs['5x5']['full'], usage)
+            print "    %s" % name
             rooms.append(
                 Object(
                     geomorph(cross_hatch_texture=earth_texture),
@@ -336,8 +360,8 @@ class Dungeon(object):
                 ),
             )
 
-            (name, geomorph, metadata) = random.choice(geomorphs['5x5']['full'])
-            geomorph = geomorphs['5x5']['full'][1][1]
+            (name, geomorph, metadata, usage) = self.choose_geomorph(geomorphs['5x5']['full'], usage)
+            print "    %s" % name
             rooms.append(
                 Object(
                     geomorph(cross_hatch_texture=earth_texture),
@@ -345,33 +369,50 @@ class Dungeon(object):
                 ),
             )
 
-        return rooms
+        return (rooms, usage)
 
-    def place_center(self, povobj, dungeon_map, geomorphs, xsize=2, zsize=2,
+    def place_center(self, povobj, dungeon_map, geomorphs, usage, xsize=2, zsize=2,
             earth_texture=cross_hatch_2):
+
+        print "Placing inner"
+
         for x in range(0, xsize):
             for z in range(0, zsize):
-                (name, geomorph, metadata) = random.choice(geomorphs['10x10']['full'])
+                result = self.create_full_size_tile(geomorphs, usage,
+                            earth_texture=earth_texture),
+                room = result[0][0]
+                usage = result[0][1]
+                # (room, usage) = self.create_full_size_tile(geomorphs, usage,
+                #             earth_texture=earth_texture),
                 povobj.append(
                     Object(
-                        self. create_full_size_tile(geomorphs, earth_texture=earth_texture),
+                        room,
                         "rotate <0, %d, 0> translate <%d, 0, %d>" % \
                                 (random.choice([0, 90, 180, 270]),
                                  x * 100 + 75, z * 100 + 75),
                     )
                 )
 
-        return povobj, dungeon_map
+        return povobj, dungeon_map, usage
 
     def create_random_dungeon(self, geomorphs, xsize=2, zsize=2, povobj=None,
-            cross_hatch_texture=cross_hatch_2):
+                              cross_hatch_texture=cross_hatch_2):
+
+        usage = {}
+
         dungeon_map = self.initialize_map(xsize, zsize)
         if not povobj:
             povobj = Merge()
 
-        (povobj, dungeon_map) = self.place_corners(povobj, dungeon_map, geomorphs, xsize, zsize, earth_texture=cross_hatch_texture)
-        (povobj, dungeon_map) = self.place_sides(povobj, dungeon_map, geomorphs, xsize, zsize, earth_texture=cross_hatch_texture)
-        (povobj, dungeon_map) = self.place_center(povobj, dungeon_map, geomorphs, xsize, zsize, earth_texture=cross_hatch_texture)
+        (povobj, dungeon_map, usage) = self.place_corners(povobj, dungeon_map,
+                geomorphs, usage, xsize, zsize,
+                earth_texture=cross_hatch_texture)
+        (povobj, dungeon_map, usage) = self.place_sides(povobj, dungeon_map,
+                geomorphs, usage, xsize, zsize,
+                earth_texture=cross_hatch_texture)
+        (povobj, dungeon_map, usage) = self.place_center(povobj, dungeon_map,
+                geomorphs, usage, xsize, zsize,
+                earth_texture=cross_hatch_texture)
 
         return povobj
 
