@@ -561,7 +561,16 @@ def main():
     )
     camera.write(pov_file)
 
-    pov_obj.write(pov_file)
+    rotation = (0, 0, 0)
+    if args.rotation:
+        rotation = args.rotation
+
+    maze = Object(
+            pov_obj,
+            translate=((xsize + 1) / 2 * -100, 0, (zsize + 1) / 2 * -100),
+            rotate=rotation
+    )
+    maze.write(pov_file)
 
     settings = Settings()
     renderer = POV()
