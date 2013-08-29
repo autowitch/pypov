@@ -23,7 +23,7 @@ def full_10x10_003_info():
             passage_type="hewn",
             wet=False,
             multi_level=False,
-            keywords=['INCOMPLETE', 'temple', 'white', 'complex', 'columns', 'multiple rooms'])
+            keywords=['temple', 'white', 'complex', 'columns', 'multiple rooms'])
 
 def full_10x10_003(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
         cross_hatch_texture=cross_hatch_2):
@@ -89,6 +89,16 @@ def full_10x10_003(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
     columns.append(Cylinder((7, 9, -15), (7, 20, -15), 0.75))
     columns.append(Cylinder((7, 9, -23), (7, 20, -23), 0.75))
 
+    columns.append(Cylinder((-7, 9, -15), (-7, 9.5, -15), 1))
+    columns.append(Cylinder((-7, 9, -23), (-7, 9.5, -23), 1))
+    columns.append(Cylinder((7, 9, -15), (7, 9.5, -15), 1))
+    columns.append(Cylinder((7, 9, -23), (7, 9.5, -23), 1))
+
+    columns.append(Cylinder((-7, 19.5, -15), (-7, 20.001, -15), 1))
+    columns.append(Cylinder((-7, 19.5, -23), (-7, 20.001, -23), 1))
+    columns.append(Cylinder((7, 19.5, -15), (7, 20.001, -15), 1))
+    columns.append(Cylinder((7, 19.5, -23), (7, 20.001, -23), 1))
+
     geomorph = Union(
         Difference(
             Merge(
@@ -96,14 +106,14 @@ def full_10x10_003(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
             ),
             Union(
                 # Halls
-                Box((-22.5, 10.0001,  -48), (-27.5, 21, -51)),
-                Box((22.5, 10.0002,  -48), (27.5, 21, -51)),
-                Box((-40, 10.01, -22.5), (-51, 21, -27.5)),
+                Box((-22.5, 10.0001,  -40), (-27.5, 21, -51)),
+                Box((-27.4999, 10.0003,  -40), (-35, 21, -45)),
+                Box((22.5, 10.0002,  -40), (27.5, 21, -51)),
+                Box((-37, 10.01, -22.5), (-51, 21, -27.5)),
 
                 Box((40, 10.01, -22.5), (51, 21, -27.5)),
-                Box((-40, 10.01, 22.5), (-51, 21, 27.5)),
+                Box((-30, 10.01, 22.5), (-51, 21, 27.5)),
                 Box((40, 10.01, 22.5), (51, 21, 27.5)),
-
 
                 # Sides
 
@@ -112,7 +122,15 @@ def full_10x10_003(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
 
                 # Rooms and non-temple passages
 
-#                Box((22.50001, 10.0002, 10), (-22.50001, 21, 15)),
+                Box((45, 10.0002, -22.50001), (40, 21, 35)),
+                Box((48, 10.0002, 37), (35, 21, 47)),
+                Box((41, 10.0001, 34), (44, 18, 38)),
+
+                Box((-40, 10, 48), (-29, 21, 29)),
+                Box((-45, 10, 20), (-30, 21, 0)),
+                Box((-35, 10.00003, 30), (-39, 18, 18)),
+                Box((-38, 10.00001, 1), (-34, 21, -28)),
+                Box((-35, 10, 45.0001), (-22.50001, 21, 40)),
 
                 wall_texture_1,
             ),
@@ -131,6 +149,17 @@ def full_10x10_003(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
                 Box((-8, 7, 38), (8, 21, 47)),         # inner sanctum
                 Box((-10, 8, 38), (-20, 21, 45)),      # side chamber 1
                 Box((10, 8, 38), (20, 21, 45)),        # side chamber 2
+
+                # Entry chambers
+                Union(
+                    Box((16, 10, -38), (40, 21, -25)),
+                    Box((-17, 10.00001, -30), (17, 18, -34)),
+
+                    Box((-16, 10, -40), (-35, 21, -25)),
+                    Box((-22, 10, -42), (-35, 21, -52)),
+                    Box((-33, 10.0001, -39), (-28, 17, -43)),
+                    wall_texture_1
+                ),
 
                 # Doors - axial
                 Box((-4, 10.0001, -25), (4, 18, -29)),
@@ -157,7 +186,8 @@ def full_10x10_003(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
 
                 white_plaster,
                 rotate=(0, 11, 0),
-            )
+            ),
+            Box((-10, 12, -1.5), (10, 21, 1.5), "rotate <0, -30, 0> translate <35, 0, -27>", wall_texture_1),
         ),
         Object(
             columns,
@@ -168,3 +198,4 @@ def full_10x10_003(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
         rotate=rotate
     )
     return geomorph
+

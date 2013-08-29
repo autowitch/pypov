@@ -325,7 +325,7 @@ class Dungeon(object):
             earth_texture=cross_hatch_2):
 
         rooms = None
-        if random.randint(0, 100) <= 20:
+        if random.randint(0, 100) <= 50:
             (name, geomorph, metadata, usage) = self.choose_geomorph(geomorphs['10x10']['full'], usage)
             print "    %s" % name
             rooms = geomorph(cross_hatch_texture=earth_texture)
