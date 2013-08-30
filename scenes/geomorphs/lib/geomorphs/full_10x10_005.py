@@ -75,11 +75,11 @@ def full_10x10_005(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
                                "-pow(%s, f_rounded_box(x + 4, y, z - 10, 3, 3, 8, 15)) " % blob_threshold  +
                                "-pow(%s, f_rounded_box(x - 7, y, z + 20, 5, 3, 5, 25)) " % blob_threshold  +
                                "-pow(%s, f_rounded_box(x + 2, y + 3, z + 40, 9, 30, 6, 8)) " % blob_threshold  +
-                               "-pow(%s, f_sphere(x - 20, y - 3, z - 20, 10)) " % blob_threshold  +
+                               "-pow(%s, f_sphere(x - 22, y - 3, z - 22, 13)) " % blob_threshold  +
                                "-pow(%s, f_sphere(x - 10, y - 3, z - 12, 7)) " % blob_threshold  +
                                "-pow(%s, f_rounded_box(x + 6, y, z + 12, 6, 4, 40, 6)) " % blob_threshold +
-                               "-pow(%s, f_rounded_box(x + 5, y + 2, z - 38, 6, 12, 14, 7)) " % blob_threshold +
-                               "-pow(%s, f_sphere(x + 8, y + 2, z - 25, 6)) " % blob_threshold  +
+                               "-pow(%s, f_rounded_box(x + 5, y + 2, z - 35, 6, 12, 14, 7)) " % blob_threshold +
+                               "-pow(%s, f_sphere(x + 8, y + 2, z - 25, 7)) " % blob_threshold  +
                                "-pow(%s, f_rounded_box(x + 9, y - 2, z + 20, 5, 6, 3, 18)) " % blob_threshold  +
                                "-pow(%s, f_sphere(x / 2 + 15, y, z + 21, 6)) " % blob_threshold +
                                "-pow(%s, f_sphere(x / 1.4 + 13, y * 1.25, (z * 4) + 24, 4)) " % blob_threshold +
@@ -89,9 +89,9 @@ def full_10x10_005(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
                                "- fn_Pigm(x, y, z).gray*0.10 " +
                                "} " +
                                "contained_by { box { <-50.001, -50.001, -50.001>, <50.001, 50.001, 50.001> } } " +
-                               "max_gradient 20 " +
+                               "max_gradient 64 " +
                                "all_intersections ",
-                               translate=(0, 20, 0),
+                               translate=(2, 20, 0),
                                rotate=(0, 10, 0),
                     ),
                     Texture("T_Stone10", scale=(10, 10, 10)),
