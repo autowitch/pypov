@@ -85,7 +85,7 @@ def full_10x10_005(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
                                "-pow(%s, f_sphere(x / 1.4 + 13, y * 1.25, (z * 4) + 24, 4)) " % blob_threshold +
                                "-pow(%s, f_sphere(x + 13, y, z + 27, 7)) ) " % blob_threshold +
                                "+ f_ridged_mf(x / 10, y / 15, z / 10, 1, 0.5, 0.5, 1.2, 1, 2) * 2 " +
-                               "- f_ridged_mf((x - 34231) / 8, (y + 6427) / 4, (z - 9423421) / 12, 1, 0.5, 0.5, 1.2, 1, 2) * 2 " +
+                               "- f_ridged_mf((x - 34231) / 8, (y + 6427) / 4, (z - 9423421) / 12, 1, 0.5, 0.5, 1.2, 1, 2) * 1.5 " +
                                "- fn_Pigm(x, y, z).gray*0.10 " +
                                "} " +
                                "contained_by { box { <-50.001, -50.001, -50.001>, <50.001, 50.001, 50.001> } } " +
