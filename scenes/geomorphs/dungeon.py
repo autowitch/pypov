@@ -506,6 +506,18 @@ def main():
                         dest='seed',
                         metavar='INT',
                         help='Seed the random number generator with this value')
+    parser.add_argument('-x', '--xsize',
+                        type=int,
+                        default=2,
+                        dest='xsize',
+                        metavar='INT',
+                        help='Number of x axis full size tiles')
+    parser.add_argument('-z', '--zsize',
+                        type=int,
+                        default=2,
+                        dest='zsize',
+                        metavar='INT',
+                        help='Number of z axis full size tiles')
     parser.add_argument('--ground-offset',
                         default=0,
                         type=int,
@@ -522,8 +534,8 @@ def main():
         earth_texture = textures[args.earth_texture]
 
     d = Dungeon(seed=args.seed)
-    xsize = 2
-    zsize = 2
+    xsize = args.xsize
+    zsize = args.zsize
     geomorphs = d.load_geomorph_modules(d.find_geomorphs())
     (geomorphs, shortcodes) = d.arrange_geomorphs(geomorphs)
     pov_obj = d.create_random_dungeon(geomorphs, xsize=xsize, zsize=zsize,
@@ -549,7 +561,16 @@ def main():
     )
     camera.write(pov_file)
 
-    pov_obj.write(pov_file)
+    rotation = (0, 0, 0)
+    if args.rotation:
+        rotation = args.rotation
+
+    maze = Object(
+            pov_obj,
+            translate=((xsize + 1) / 2 * -100, 0, (zsize + 1) / 2 * -100),
+            rotate=rotation
+    )
+    maze.write(pov_file)
 
     settings = Settings()
     renderer = POV()
