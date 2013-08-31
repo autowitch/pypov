@@ -33,7 +33,6 @@ def edge_5x10_005(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
         rooms.append(Box((start - 5, 12, 4.5), (start + 5, 21, 16)))
         rooms.append(Box((start - 5, 12, -4.5), (start + 5, 21, -16)))
         rooms.append(Box((start - 1.5, 11, -5), (start + 1.5, 18, 5)))
-        print start
         start += 12
 
     geomorph = Union(

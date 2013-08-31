@@ -28,7 +28,8 @@ def general(pov_file):
             media="on",
         ),
         assumed_gamma = 1.0,
-        max_trace_level=100
+        max_trace_level=100,
+        ambient_light = (0.1, 0.1, 0.1),
     ).write(pov_file)
 
     Camera(
