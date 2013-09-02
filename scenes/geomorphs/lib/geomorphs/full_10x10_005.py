@@ -89,7 +89,7 @@ def full_10x10_005(rotate=(0, 0, 0), translate=(0, 0, 0), detail_level=1,
                                "- fn_Pigm(x, y, z).gray*0.10 " +
                                "} " +
                                "contained_by { box { <-50.001, -50.001, -50.001>, <50.001, 50.001, 50.001> } } " +
-                               "max_gradient 64 " +
+                               "max_gradient 255 " +
                                "all_intersections ",
                                translate=(0, 20, 2),
                                rotate=(0, 10, 0),
